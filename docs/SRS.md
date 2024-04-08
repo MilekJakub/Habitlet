@@ -115,7 +115,7 @@ older browser versions.
 
 #### Mobile Support
 Initial exclusion of mobile platforms could constrain user accessibility and market reach, necessitating a responsive
-design approac to somehow accommodate mobile devices.
+design approach to somehow accommodate mobile devices.
 
 #### Client Devices
 The application's performance on client devices, especially in terms of graphics and real-time features
@@ -153,25 +153,27 @@ to their registered email address.
 
 2.2 The system shall allow users to choose character's class.
 
-2.2 The system shall allow users to create and modify character's apperance.
+2.3 The system shall allow users to create and modify character's apperance.
 
-2.3 The system shall track and display the character's level and experience.
+2.4 The system shall track and display the character's level and experience.
 
-2.4 The system shall track and display the character's inventory.
+2.5 The system shall track and display the character's inventory.
 
-2.5 The system shall track and display the character's attributes.
+2.6 The system shall track and display the character's attributes.
 
-2.6 The system shall track and display the character's skills.
+2.7 The system shall track and display the character's skills.
 
 #### 3. Habit Timer
 
 3.1 The system shall allow users to start and cancel the timer.
 
-3.1 The system shall notify users with an alarm or notification when a session ends.
+3.2 The system shall notify users with an alarm or notification when a session ends.
 
-3.2 The system shall allow users to customize focus intervals for sessions.
+3.3 The system shall allow users to customize focus intervals for sessions.
 
-3.3 The system shall track and provide statistics on the user's sessions.
+3.4 The system shall track and provide heatmap on the user's sessions.
+
+3.5 The system shall track and provide statistics on the user's sessions.
 
 #### 4. Notes
 
@@ -189,36 +191,39 @@ to their registered email address.
 
 4.7 The system shall allow users to use searchbar to find the notes.
 
-#### 5. Tutorial
+#### 5. Adventures
 
-5.1 The system shall offer an interactive tutorial for new users that explains the game mechanics and learning tools.
+5.1 The system shall allow users to open the map with adventures.
 
-#### 6. Quests
+5.2 The system shall allow users to select and read about the adventure.
 
-6.1 The system shall provide a main quests system.
+5.3 The system shall allow users to go for an adventure.
 
-6.2 The system shall provide a daily quests system.
+5.4 The system shall track user's completed adventures.
 
-6.3 Main quests system shall serve to navigate players throughout the gameplay experience.
+#### 6. Combat System
 
-6.4 Daily quests system shall integrate with the Habit Timer functionality.
+6.1 The system shall allow users to generate fight between their characters and attacked enemies.
 
-#### 7. Adventures
+6.2 The system shall show the result of fight to user.
 
-7.1 ... 
+6.3 The system shall generate the animation of the fight for user.
+
+#### 7. Quests
+
+7.1 The system shall provide a main quests system.
+
+7.2 The system shall provide a daily quests system.
+
+7.3 Main quests system shall serve to navigate players throughout the gameplay experience.
+
+7.4 Daily quests system shall integrate with the Habit Timer functionality.
 
 #### 8. Rewards & Progression
 
 8.1 ... 
 
-#### 9. Responsive Design
-
-9.1 The system shall be compatible with various devices, including PCs, laptops, and mobile devices,
-ensuring a consistent user experience.
-
-#### 10. Cross-Browser Support
-
-10.1 The system shall ensure functionality across major web browsers, including Chrome, Firefox, Edge, and Opera.
+#### 9. 
 
 ### Non-functional requirements
 ...
