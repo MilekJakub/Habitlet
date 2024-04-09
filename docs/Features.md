@@ -38,7 +38,6 @@
 - Habit Guilds
 - Wellness Springs
 - Achievement Hall
-- Market of Mastery
 
 ## Shops
 - Potion Shop
