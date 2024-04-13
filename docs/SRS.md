@@ -48,7 +48,6 @@ enhanced by productivity tools. Here's a summarization of its major functions:
 - Goals
 - Events
 - Tasks
-- Habit Guilds
 - Achievement Hall
 - Shops
 - Adventures
@@ -159,63 +158,28 @@ necessitate additional investment in server infrastructure and database and appl
 - 5.9 The system shall allow players to view a history of their goals, including those achieved, in progress, and abandoned, along with relevant performance metrics.
 - 5.10 The system shall allow players to share their goal achievements on their profile or with other players if desired.
 
-### 6. Events
-- 6.1 The system shall offer a variety of events: Seasonal Challenges, Event-Based Challenges, and Time-Limited Quests.
-
-**Seasonal Challenges**
-- 6.2 The system shall schedule and launch Seasonal Challenges in alignment with specific seasons (e.g., Summer or Winter) and make them accessible to all players.
-- 6.3 The system shall display the start and end dates associated with each Seasonal Challenge.
-- 6.4 The system shall display the objectives, and rewards associated with each Seasonal Challenge.
-
-**Event-Based Challenges**
-- 6.5 The system shall introduce Event-Based Challenges in correspondence with real-world events or holidays (e.g., Halloween, Christmas).
-- 6.6 The system shall provide thematic challenges, rewards, and in-game environments that reflect the real-world event or holiday theme.
-
-**Time-Limited Quests**
-- 6.7 The system shall regularly release Time-Limited Quests available for completion within a short, specified timeframe (e.g., weekends).
-- 6.8 The system shall notify players before upcoming Time-Limited Quests, detailing their objectives and potential rewards.
-
-**General Requirements for All Events**
-- 6.9 The system shall track and update players' progress in real time as they participate in various events.
-- 6.10 The system shall award players in-game rewards, achievements, or enhancements upon the successful completion of event challenges.
-- 6.11 The system shall provide a leaderboard or ranking system for events where player performance is compared, fostering a competitive environment.
-- 6.12 The system shall offer a preview or teaser of upcoming events, including a brief overview and key dates, to engage and inform players.
-- 6.13 The system shall ensure that the difficulty and objectives of event challenges are balanced and accessible for players of varying skill levels.
-- 6.14 The system shall provide a feedback mechanism for players to rate and comment on events, contributing to the improvement of future events.
-- 6.15 The system shall archive past events, allowing players to view their participation history, achievements, and rewards earned in each event.
-
-### 7. Tasks
-**Daily Missions**
+### 6. Tasks
 - 7.1 The system shall generate and assign a set of Daily Missions to each player every 24 hours.
 - 7.2 The system shall display the objectives, rewards, and time remaining for each Daily Mission within the user interface.
 - 7.3 The system shall automatically track and update the player's progress towards completing each Daily Mission in real time.
 - 7.4 The system shall award players with in-game rewards, points, or currency upon the successful completion of Daily Missions.
 - 7.5 The system shall allow players to replace or skip a certain number of Daily Missions per day, subject to specific rules or limitations.
+- 7.6 The system shall provide notifications or reminders to players about new or incomplete Tasks, encouraging engagement and participation.
+- 7.7 The system shall allow players to view a history of their Tasks, including completed, in progress, and missed Tasks, along with relevant performance metrics.
+- 7.8 The system shall ensure that the Tasks are balanced in terms of difficulty and are achievable for players of various skill levels.
+- 7.9 The system shall integrate the Tasks feature with other game features (e.g., Events, Goals) to provide a cohesive and immersive gameplay experience.
+- 7.10 The system shall provide a mechanism for players to share their Task achievements on their profile or with other players if desired.
+- 7.11 The system shall ensure data privacy and security for all information related to players' Tasks in accordance with applicable laws and regulations.
+- 7.12 The system shall be capable of handling a high volume of players engaging with Tasks simultaneously, ensuring scalability and performance.
+- 7.13 The system shall offer an API for third-party integrations, allowing other applications to access Task-related data with the user's consent.
 
-**Skill Challenges**
-- 7.6 The system shall offer Skill Challenges that are designed to test and improve players' proficiency in various in-game skills or abilities.
-- 7.7 The system shall categorise Skill Challenges based on difficulty levels and skill types.
-- 7.8 The system shall provide detailed instructions and success criteria for each Skill Challenge.
-- 7.9 The system shall track players' attempts, successes, and improvements in Skill Challenges and provide feedback on their performance.
-- 7.10 The system shall reward players with special achievements, badges, or enhancements upon successfully completing Skill Challenges, especially for higher difficulty levels.
-
-**General Requirements for Tasks**
-- 7.11 The system shall provide notifications or reminders to players about new or incomplete Tasks, encouraging engagement and participation.
-- 7.12 The system shall allow players to view a history of their Tasks, including completed, in progress, and missed Tasks, along with relevant performance metrics.
-- 7.13 The system shall ensure that the Tasks are balanced in terms of difficulty and are achievable for players of various skill levels.
-- 7.14 The system shall integrate the Tasks feature with other game features (e.g., Events, Goals) to provide a cohesive and immersive gameplay experience.
-- 7.15 The system shall provide a mechanism for players to share their Task achievements on their profile or with other players if desired.
-- 7.16 The system shall ensure data privacy and security for all information related to players' Tasks in accordance with applicable laws and regulations.
-- 7.17 The system shall be capable of handling a high volume of players engaging with Tasks simultaneously, ensuring scalability and performance.
-- 7.18 The system shall offer an API for third-party integrations, allowing other applications to access Task-related data with the user's consent.
-
-### 8. Adventures
+### 7. Campaign
 - 8.1 The system shall allow users to open the map with adventures.
 - 8.2 The system shall allow users to select and read about the adventure.
 - 8.3 The system shall allow users to go for an adventure.
 - 8.4 The system shall track the user's completed adventures.
 
-### 9. Combat System
+### 8. Combat System
 - 9.1 The system shall allow users to generate fights between their characters and attack enemies.
 - 9.2 The system shall show the result of the fight to the user.
 - 9.3 The system shall generate the animation of the fight for the user.
