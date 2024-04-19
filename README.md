@@ -5,8 +5,10 @@ An online RPG game that facilitates effective habit-building.
 ## Introduction
 
 The world is inexorably moving forward. There are more and more things weighing on our minds.
-Personal development is a crucial aspect of our lives.
-Nowadays we can describe a habit and how to develop it.
+Personal development is a crucial aspect of our lives. We need to find the time and willingness to do hard things.
+We cannot determine our motivation because it is unreliable. 
+Our work must be automated; we must not be reluctant to do it or wonder if we want to.
+We need to sit down and do our work. How can we do it? Nowadays, we can describe a habit and how to develop it.
 This project is designed to build habits critical to achieving our goals.
 
 ## Atomic Habits by James Clear
@@ -26,8 +28,6 @@ How to create a good habit:
 
 ## Okay, but what does this do with the game?
 Why is the game the best tool for developing the habit of everyday learning?
-
-Let's see.
 
 ### The 1st law (Cue)
 The book clearly states:
@@ -79,11 +79,11 @@ How to learn new things?
 - We finish our education and get a reward in the form of a job.
 - If we want an achievement system, we have to build it ourselves.
 
-It isn't fun at all. But...
+It isn't fun at all, but I found a solution.
 
-Progression and rewards are an integral part of games!
+Progression and rewards are an integral part of games:
 
 - Game progress is visible immediately.
 - The games can be competitive.
 - We are rewarded for pushing forward.
-- The games are simply satisfying
+- The games are satisfying.
