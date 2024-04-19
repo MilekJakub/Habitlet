@@ -191,6 +191,7 @@ The application should provide an intuitive and engaging user interface that sea
 The user experience should be designed to motivate and retain users, especially those who might struggle with maintaining consistency in their personal development efforts.
 
 - **Priority:** 2
+- **Goal:** To go to any functionality in the application, we should not perform more than 3 steps (clicks, swipes, etc.)
 - **Criticality:** High (essential for user satisfaction and engagement)
 - **Feasibility:** High (achievable with thoughtful design and user testing)
 - **Risk:** Poor user experience leading to low engagement and user retention
@@ -203,6 +204,7 @@ The application must provide fast response times and smooth animations, especial
 Performance should not degrade as the number of concurrent users increases.
 
 - **Priority:** 3
+- **Goal:** The goal is to handle 10,000 users simultaneously.
 - **Criticality:** High (impacts user satisfaction and the application's reputation)
 - **Feasibility:** Medium to High (depends on the optimization of front-end and back-end systems)
 - **Risk:** Slow performance leading to frustration and reduced user engagement
@@ -214,6 +216,7 @@ Performance should not degrade as the number of concurrent users increases.
 Given the application involves user registration and personal data management, it must adhere to strict security protocols to protect user data from unauthorized access, breaches, and other vulnerabilities.
 
 - **Priority:** 1
+- **Goal:** The system should use TLS/SSL protocol, use password encryption and use keyvaults for application secrets.
 - **Criticality:** High (critical for user trust and legal compliance)
 - **Feasibility:** High (standard security practices can be implemented)
 - **Risk:** Data breach or unauthorized access to user data
@@ -226,6 +229,7 @@ The application must be designed to efficiently handle an increase in user load 
 This includes the ability to scale up resources during peak usage times and scale down during off-peak hours to optimize cost and performance.
 
 - **Priority:** 2
+- **Goal:** The system should be able to distribute network traffic to at least two servers.
 - **Criticality:** High (essential for long-term success and growth)
 - **Feasibility:** Medium to High (depends on the architectural choices and cloud services)
 - **Risk:** Inability to handle peak loads, leading to slow response times and potential downtime
@@ -238,13 +242,13 @@ The application should be compatible with major browsers and devices to ensure a
 While initial focus might be on desktop platforms, the design should not preclude the future inclusion of mobile platforms.
 
 - **Priority:** 3
+- **Goal:** The application should behave and look the same on Chrome, Firefox, Edge, and Opera.
 - **Criticality:** Medium (important for accessibility but initially focused on desktop)
 - **Feasibility:** High (with responsive design and cross-browser testing)
 - **Risk:** Limited access due to compatibility issues with certain browsers or devices
 - **Likelihood of occurrence:** Low to Medium (depends on the range of devices and browsers supported)
 - **Business Impact:** Medium (affects user base size and diversity)
 - **Risk minimisation methods:** Adhere to web standards, perform extensive cross-browser and device testing, and design with a responsive and adaptive approach from the outset.
-
 
 ### External Interface Requirements
 ...
