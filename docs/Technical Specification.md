@@ -16,6 +16,7 @@
 - MediatR
 - Automapper
 - Serilog
+- Redis
 
 ## Other:
 - Swagger
@@ -38,8 +39,8 @@
 ### Server Infrastructure
 
 - **Web Server**
-- **Database Server:** options include MySQL, PostgreSQL, MongoDB, or cloud-based solutions
-- **File Storage:** static content like game assets, images, and user-generated content
+- **Database Server:** options include MSSQL, PostgreSQL, MongoDB, or cloud-based solutions
+- **File Storage:** static content like game assets or images
 
 ### Backend Services
 
