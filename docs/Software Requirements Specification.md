@@ -3,8 +3,8 @@
 ## Introduction
 
 ### Purpose
-The application is intended for individuals who seek to combine the engagement and fun of video gaming with practical
-self-improvement tasks. It targets users interested in personal development, education, and time management and those
+The application is intended for individuals who seek to combine the engagement and fun of video gaming with habit
+building. It targets users interested in personal development, education, and time management and those
 who might struggle with maintaining motivation and consistency in their habit-forming or learning endeavours.
 
 ### Document Conventions
@@ -18,10 +18,9 @@ This document is intended for:
 
 ### Project Scope
 The application will feature an RPG game design, allowing users to experience progress.
-The design will include character development, in-game rewards, and a storyline that advances as users complete learning
-and productivity tasks.
+The design will include character development, in-game rewards, and a storyline that advances as users complete learning.
 
-The software will integrate tools such as a Habit Timer, note-taking, goals, events and tasks systems to encourage
+The software will integrate tools such as a Habit Timer, note-taking and goals to encourage
 effective learning and habit-building practices.
 
 Users will unlock new features, such as access to the adventures, by completing productivity-related tasks.
@@ -42,14 +41,10 @@ distinct and engaging value proposition.
 The software encapsulates suite of functionalities designed to engage users in a gamified habit-building experience,
 enhanced by productivity tools. Here's a summarization of its major functions:
 
-- Character Management
+- Character
 - Habit Timer
-- Note-taking Capability
+- Notes
 - Goals
-- Events
-- Tasks
-- Achievement Hall
-- Shops
 - Adventures
 - Combat System
 
@@ -123,12 +118,8 @@ necessitate additional investment in server infrastructure and database and appl
 
 ### 2. Character
 - 2.1 The system shall allow users to create a character with the given nickname.
-- 2.2 The system shall allow users to choose the character's class.
-- 2.3 The system shall allow users to create and modify a character's appearance.
-- 2.4 The system shall track and display the character's level and experience.
-- 2.5 The system shall track and display the character's inventory.
-- 2.6 The system shall track and display the character's attributes.
-- 2.7 The system shall track and display the character's skills.
+- 2.2 The system shall allow users to create and modify a character's appearance.
+- 2.3 The system shall track and display the character's level and experience.
 
 ### 3. Habit Timer
 - 3.1 The system shall allow users to start and cancel the timer.
@@ -158,29 +149,14 @@ necessitate additional investment in server infrastructure and database and appl
 - 5.9 The system shall allow players to view a history of their goals, including those achieved, in progress, and abandoned, along with relevant performance metrics.
 - 5.10 The system shall allow players to share their goal achievements on their profile or with other players if desired.
 
-### 6. Tasks
-- 7.1 The system shall generate and assign a set of Daily Missions to each player every 24 hours.
-- 7.2 The system shall display the objectives, rewards, and time remaining for each Daily Mission within the user interface.
-- 7.3 The system shall automatically track and update the player's progress towards completing each Daily Mission in real time.
-- 7.4 The system shall award players with in-game rewards, points, or currency upon the successful completion of Daily Missions.
-- 7.5 The system shall allow players to replace or skip a certain number of Daily Missions per day, subject to specific rules or limitations.
-- 7.6 The system shall provide notifications or reminders to players about new or incomplete Tasks, encouraging engagement and participation.
-- 7.7 The system shall allow players to view a history of their Tasks, including completed, in progress, and missed Tasks, along with relevant performance metrics.
-- 7.8 The system shall ensure that the Tasks are balanced in terms of difficulty and are achievable for players of various skill levels.
-- 7.9 The system shall integrate the Tasks feature with other game features (e.g., Events, Goals) to provide a cohesive and immersive gameplay experience.
-- 7.10 The system shall provide a mechanism for players to share their Task achievements on their profile or with other players if desired.
-- 7.11 The system shall ensure data privacy and security for all information related to players' Tasks in accordance with applicable laws and regulations.
-- 7.12 The system shall be capable of handling a high volume of players engaging with Tasks simultaneously, ensuring scalability and performance.
-- 7.13 The system shall offer an API for third-party integrations, allowing other applications to access Task-related data with the user's consent.
-
-### 7. Campaign
+### 6. Campaign
 - 8.1 The system shall allow users to open the map with adventures.
 - 8.2 The system shall allow users to select and read about the adventure.
 - 8.3 The system shall allow users to go for an adventure.
 - 8.4 The system shall track the user's completed adventures.
 
-### 8. Combat System
-- 9.1 The system shall allow users to generate fights between their characters and attack enemies.
+### 7. Combat System
+- 9.1 The system shall allow users to generate fights between their characters and enemies.
 - 9.2 The system shall show the result of the fight to the user.
 - 9.3 The system shall generate the animation of the fight for the user.
 
@@ -229,7 +205,7 @@ The application must be designed to efficiently handle an increase in user load 
 This includes the ability to scale up resources during peak usage times and scale down during off-peak hours to optimize cost and performance.
 
 - **Priority:** 2
-- **Goal:** The system should be able to distribute network traffic to at least two servers.
+- **Goal:** The system should be able to distribute network traffic multiple servers.
 - **Criticality:** High (essential for long-term success and growth)
 - **Feasibility:** Medium to High (depends on the architectural choices and cloud services)
 - **Risk:** Inability to handle peak loads, leading to slow response times and potential downtime
