@@ -2,6 +2,12 @@
 
 An online RPG game that facilitates effective habit-building.
 
+## [INFO]
+
+I am doing Google's UX course with this application in my mind.
+
+The project may look abandoned, but I'm working on it.
+
 ## Introduction
 
 The world is inexorably moving forward. There are more and more things weighing on our minds.
