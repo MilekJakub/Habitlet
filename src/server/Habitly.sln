@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Habitly.Identity.Tests", "M
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Habitly.Identity", "Habitly.Identity", "{F5DC0355-616B-4C47-94B1-5210F42276AC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "..\..\build\_build.csproj", "{81FD7FD5-F8C2-47FB-871F-6DBFB82BB1E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81FD7FD5-F8C2-47FB-871F-6DBFB82BB1E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81FD7FD5-F8C2-47FB-871F-6DBFB82BB1E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06DAA69E-248B-42DB-9251-57C7134C5CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{06DAA69E-248B-42DB-9251-57C7134C5CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06DAA69E-248B-42DB-9251-57C7134C5CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
