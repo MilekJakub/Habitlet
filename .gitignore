@@ -120,28 +120,6 @@ DerivedData
 project.xcworkspace
 **/.xcode.env.local
 
-# Gradle
-/build/
-/packages/rn-tester/build
-/packages/rn-tester/android/app/.cxx/
-/packages/rn-tester/android/app/build/
-/packages/rn-tester/android/app/gradle/
-/packages/rn-tester/android/app/gradlew
-/packages/rn-tester/android/app/gradlew.bat
-/packages/react-native/ReactAndroid/build/
-/packages/react-native/ReactAndroid/.cxx/
-/packages/react-native/ReactAndroid/gradle/
-/packages/react-native/ReactAndroid/gradlew
-/packages/react-native/ReactAndroid/gradlew.bat
-/packages/react-native/ReactAndroid/external-artifacts/build/
-/packages/react-native/ReactAndroid/external-artifacts/artifacts/
-/packages/react-native/ReactAndroid/hermes-engine/build/
-/packages/react-native/ReactAndroid/hermes-engine/.cxx/
-/packages/helloworld/android/app/build/
-/packages/helloworld/android/build/
-/packages/react-native-popup-menu-android/android/build/
-/packages/react-native-test-library/android/build/
-
 # Buck
 .buckd
 buck-out
