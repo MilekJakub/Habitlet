@@ -1,13 +1,22 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "properties": {
-    "Configuration": {
+    "DeployPlatform": {
       "type": "string",
-      "description": "Configuration to build - Default is 'Debug' (local) or 'Release' (server)",
-      "enum": [
-        "Debug",
-        "Release"
-      ]
+      "description": "Platform to deploy to (all, ios, android)"
+    },
+    "EasProfile": {
+      "type": "string",
+      "description": "EAS build profile to use"
+    },
+    "HabitlyExpo": {
+      "type": "string",
+      "description": "Expo personal access token for Habitly app",
+      "default": "Secrets must be entered via 'nuke :secrets [profile]'"
+    },
+    "Solution": {
+      "type": "string",
+      "description": "Path to a solution file that is automatically loaded"
     }
   },
   "definitions": {
@@ -36,7 +45,8 @@
       "enum": [
         "Clean",
         "Compile",
-        "Restore"
+        "Restore",
+        "Test"
       ]
     },
     "Verbosity": {
