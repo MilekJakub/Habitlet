@@ -14,7 +14,8 @@ using Serilog;
     GitHubActionsImage.UbuntuLatest,
     OnPullRequestBranches = ["main", "dev"],
     InvokedTargets = [nameof(Compile)],
-    ImportSecrets = [nameof(HabitlyExpo)])]
+    ImportSecrets = [nameof(HabitlyExpo)],
+    AutoGenerate = false)]
 class Build : NukeBuild
 {
     [Parameter("Platform to deploy to (all, ios, android)")]
@@ -71,12 +72,7 @@ class Build : NukeBuild
                 .StartProcess(
                     "eas",
                     $"build --platform {DeployPlatform} --non-interactive --no-wait --profile {EasProfile}",
-                    MobileDirectory,
-                    environmentVariables: new Dictionary<string, string>
-                    {
-                        ["eas-version"] = "latest",
-                        ["token"] = HabitlyExpo
-                    });
+                    MobileDirectory);
 
             process.WaitForExit();
 
