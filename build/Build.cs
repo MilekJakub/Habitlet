@@ -48,10 +48,10 @@ class Build : NukeBuild
             DotNetTasks.DotNetRestore(s => s
                 .SetProjectFile(Solution));
 
-            NpmTasks.NpmCi(s => s
+            NpmTasks.NpmInstall(s => s
                 .SetProcessWorkingDirectory(WebDirectory));
 
-            NpmTasks.NpmCi(s => s
+            NpmTasks.NpmInstall(s => s
                 .SetProcessWorkingDirectory(MobileDirectory));
         });
 
