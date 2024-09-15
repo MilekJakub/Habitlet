@@ -12,7 +12,8 @@ using Serilog;
 [GitHubActions(
     "CI",
     GitHubActionsImage.UbuntuLatest,
-    OnPullRequestBranches = ["main", "dev"],
+    OnPullRequestBranches = ["dev"],
+    OnPushBranches = ["main"],
     InvokedTargets = [nameof(Compile)],
     ImportSecrets = [nameof(HabitlyExpo)],
     AutoGenerate = false)]
