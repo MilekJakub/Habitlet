@@ -1,66 +1,56 @@
 # Application Features
 
-## Registration & Authentication
-- Account creation with email and password.
-- Login/logout functionality.
-- Email verification for account security.
-- Password recovery mechanism.
+## Onboarding
+Guides the user through the process of creating their new identity, habits and a roadmap related to it.
 
-## Character
-- Character customization options (appearance, name).
-- Character progress tracking (level, attributes, inventory).
+## Identity
+*"Identity is what you believe in."* ~ James Clear
 
-## Habit Tracker
-- Two modes: timer and stopwatch
+*"With results-based habits, you focus on what you want to achieve. With identity-based habits, you focus on who you want to become."* ~ James Clear
 
-**Timer**
-- Notification and alarm system for session end.
-- Customizable focus and break intervals.
+*"The highest form of intrinsic motivation is to make a habit part of your identity. It’s quite different to say you’re the kind of person who wants something than to say you’re the kind of person who is something."* ~ James Clear
 
-**Stopwatch**
-- User can start and stop timer at any moment.
+User can create their identity by answering questions:
+- What are your goals?
+- What type of person could achieve what I want?
+- What does the person I described do?
+- What does the person I described not do?
 
-**General**
-- Summary note after each session.
-- Progress tracking and statistics.
-- User can pause the tracker.
+## Habits
 
-## Notes
-- Rich text editor for note-taking.
-- Organizational features (folders, tags).
-- Search functionality within notes.
+*"The more often you repeat a behavior, the more you establish an identity associated with that behavior."*  ~ James Clear
 
-## Goals
-- Players can set specific habits they want to develop as goals.
-- Each goal has multiple levels of mastery (Beginner, Intermediate, Advanced, Expert, Elite).
-- Advancing through levels requires consistent habit performance - it unlocks in-game rewards and character enhancements.
+*"You don’t just snap your fingers and decide to become a completely different person. You change a little at a time, day by day, habit by habit."* ~ James Clear
 
-## Tasks
-- Daily Missions
+*"Every action you take is a vote for the type of person you wish to become."* ~ James Clear
 
-## Campaign
-- The campain tab shows to user a map.
+User can create habits based on their identity.
 
-## City
-- Shops
-- Achievement Hall
+User can create habits based on the following questions:
+- The most important thing that the person I described does is...
+- How often does the person I described do this?
+- How can I make this obvious?
+- How can I make it attractive?
+- How can I make it easy?
+- How can I make it satisfying?
 
-## Shops
-- Potion Shop
-- Equipment Emporium (swords & sandals)
-- Magic Mentor Shop (scrolls)
-- Haberdashery (visuals)
-- Time Travelers' Trinket Shop (expensive items eg. item that help you maintain habit streak)
+## Roadmap
+The user can create a roadmap to achieve their goals.
 
-## Combat System
-- Tour-Based Combat
-- Character's endurance/stamina system
+User can create a roadmap by answering questions:
+- The most important goal for me is... (goal)
+- What are the most important things you need to be able to know / do to achieve this goal? (milestones)
+- What you can do to achieve each milestone? (steps)
+- What do you need to know / be able to do to complete the step? (branches)
 
-## Tutorial
-- Interactive tutorial for new users explaining game mechanics and learning tools.
+## Sessions
+User can track their progress by creating sessions.
+User can select a habit and a branch to work on.
 
-## Responsive Design
-- Compatibility with various devices (PC, laptop, and mobile planned).
+## Experience Points
+After completing a session, the user receives experience points.
+Experience points are used to level up the identity and habits.
 
-## Cross-Browser Support
-- Ensure functionality across major web browsers (Chrome, Firefox, Edge, Opera).
+## Heatmap
+User can view their progress on a heatmap.
+After completing a session, the heatmap is updated.

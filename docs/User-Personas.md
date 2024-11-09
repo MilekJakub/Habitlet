@@ -1,7 +1,5 @@
 # User Persona
 
-[Based on this article.](https://careerfoundry.com/en/blog/ux-design/how-to-define-a-user-persona/)
-
 ## How to define User Persona?
 
 A persona clarifies who is in your target audience by answering the following questions:
