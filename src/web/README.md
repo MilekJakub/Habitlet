@@ -10,7 +10,7 @@ An application for effective learning and habit formation.
 
 ## Development
 
-The app is built using React. The main entry point is `src/index.js`.
+The app is built using React. The main entry point is `src/main.tsx`.
 
 The app is divided into modules, which are located in the `src` directory.
 
