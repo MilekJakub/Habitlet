@@ -1,42 +1,48 @@
 name: CI
 
 on:
-  workflow_dispatch:
-    inputs:
-      platform:
-        description: 'Which platform to build for?'
-        required: true
-        type: choice
-        default: all
-        options:
-          - ios
-          - android
-          - all
+  push:
+    branches:
+      - "*"
+    paths-ignore:
+      - "*.md"
   pull_request:
     branches:
-      - main
-      - dev
+      - "*"
+    paths-ignore:
+      - "*.md"
 
 jobs:
-  ubuntu-latest:
-    name: ubuntu-latest
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 'latest'
-      - name: Setup Expo and EAS
-        uses: expo/expo-github-action@v8
+          node-version: '20.x'
+
+      - name: Install dependencies
+        working-directory: ./src/web
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: ./src/web
+        run: npm run lint
+
+      - name: Run tests
+        working-directory: ./src/web
+        run: npm test
+
+      - name: Build application
+        working-directory: ./src/web
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
         with:
-          eas-version: latest
-          token: ${{ secrets.HABITLY_EXPO }}
-      - name: 'Cache: .nuke/temp, ~/.nuget/packages'
-        uses: actions/cache@v4
-        with:
-          path: |
-            .nuke/temp
-            ~/.nuget/packages
-          key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
-      - name: 'Run: Compile'
-        run: ./build.cmd Compile
+          name: build
+          path: ./src/web/dist
