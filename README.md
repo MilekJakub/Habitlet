@@ -2,7 +2,7 @@
 
 An online RPG game that facilitates effective habit-building.
 
-## [Figma](https://www.figma.com/design/lYLiAaPIqGyNquIwA4CGNQ/Habitlet?node-id=0-1&t=qq1gpb63xNHbcbiH-1)
+<a href="https://www.figma.com/design/db0vQ3SdazXTof7ekBDUn7/Event-Storming?node-id=48-12914&t=Axavi7m4T8Ls7FwE-1" target="_blank">![Big Picture ES Artifact](./img/BigPicture.jpg)</a>
 
 ## Introduction
 
