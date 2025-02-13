@@ -1,10 +1,10 @@
+import React from "react";
 import "./App.css";
+import { Button } from "./components/ui/button";
 
 function App() {
   return (
-    <div className="flex flex-col">
-      <h1>App</h1>
-    </div>
+    <Button>Click me</Button>
   );
 }
 
