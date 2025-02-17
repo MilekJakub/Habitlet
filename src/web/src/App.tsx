@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import { Button } from "./components/ui/button";
-import { ButtonsShowcase } from "./components/ui/showcase/buttonsShowcase";
-import { TypographyShowcase } from "./components/ui/showcase/typographyShowcase";
+
+import { BrowserRouter, Routes, Route } from "react-router";
+import { WelcomePage } from "./components/userManagement/welcome/welcomePage";
+import { DevPage } from "./components/dev/devPage";
+import { RegistrationPage } from "./components/userManagement/register/registrationPage";
+import { OtpPage } from "./components/userManagement/otp/otpPage";
+import { UserDetailsPage } from "./components/userManagement/details/userDetailsPage";
 
 function App() {
-  const [showButtons, setShowButtons] = useState(false);
-  const [showTypography, setShowTypography] = useState(false);
   return (
-    <>
-      <Button onClick={() => setShowButtons(!showButtons)}>Buttons</Button>
-      {showButtons && <ButtonsShowcase />}
-      <Button onClick={() => setShowTypography(!showTypography)}>Typography</Button>
-      {showTypography && <TypographyShowcase />}
-    </>
-    
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/dev" element={<DevPage />} />
+        <Route path="/register" element={<RegistrationPage />} />
+        <Route path="/confirm" element={<OtpPage />} />
+        <Route path="/details" element={<UserDetailsPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

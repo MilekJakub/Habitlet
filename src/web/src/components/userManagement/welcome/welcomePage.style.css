@@ -1,0 +1,11 @@
+#root {
+  height: 100vh;
+}
+
+.decoration {
+  text-decoration: underline;
+  text-decoration-color: #1e40af; /* Corresponds to Tailwind's decoration-blue-900 */
+  text-decoration-style: wavy;
+  text-underline-offset: 10%;
+  text-decoration-thickness: 10%;
+}

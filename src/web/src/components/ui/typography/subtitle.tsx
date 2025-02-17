@@ -1,7 +1,20 @@
 import React from "react";
 
-export const Subtitle = ({ children, type }: { children: React.ReactNode, type: "s1" | "s2" }) => {
-  return <p className={type === "s1" ? "text-lg font-semibold" : "text-base font-semibold"}>{children}</p>
+interface SubtitleProps {
+  children: React.ReactNode;
+  type: "s1" | "s2";
+  className?: string;
+}
+
+const Subtitle: React.FC<SubtitleProps> = ({ children, type, className }) => {
+  const typeClasses = {
+    s1: "text-lg font-semibold",
+    s2: "text-base font-semibold",
+  };
+
+  return (
+    <div className={`${typeClasses[type]} ${className || ""}`}>{children}</div>
+  );
 };
 
 export default Subtitle;
