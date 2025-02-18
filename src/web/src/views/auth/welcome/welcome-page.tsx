@@ -1,17 +1,18 @@
 import React from "react";
-import Logo from "../../ui/typography/logo";
-import { Header } from "../../ui/typography/header";
-import "./welcomePage.style.css";
-import { Button } from "../../ui/button";
-import Subtitle from "../../ui/typography/subtitle";
+import { Logo } from "@/components/typography/logo";
+import { Header } from "@/components/typography/header";
+import { Button } from "@/components/ui/button";
+import { Subtitle } from "@/components/typography/subtitle";
 import { NavLink } from "react-router";
+
+import "./welcome-page.style.css";
 
 export const WelcomePage = () => (
   <div className="flex flex-col mx-auto w-fit h-fit gap-[64px] items-center justify-center self-center min-h-screen justify-center">
     <div className="flex flex-col w-fit h-fit gap-[16px]">
       <Logo className="text-center">HABITLET</Logo>
       <Header type="h1" className="text-center border-none">
-        Your personal{" "}
+        Your ownz {" "}
         <span className="text-yellow-500">
           s<span className="decoration">ucces</span>s
         </span>{" "}

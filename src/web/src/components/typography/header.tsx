@@ -27,5 +27,3 @@ export const Header: React.FC<HeaderProps> = ({
     </Tag>
   );
 };
-
-export default Header;

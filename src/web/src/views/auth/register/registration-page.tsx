@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Header } from "../../ui/typography/header";
-import { Input } from "../../ui/input";
-import { Button } from "../../ui/button";
-import { Body } from "../../ui/typography/body";
+import { Header } from "@/components/typography/header";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Body } from "@/components/typography/body";
 import { Link, NavLink } from "react-router";
 import { Loader2 } from "lucide-react";
+
+import "./registration-page.style.css";
 
 export const RegistrationPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +15,7 @@ export const RegistrationPage = () => {
     <>
       <div className="flex flex-col mx-auto w-fit h-fit gap-[64px] items-center justify-center self-center min-h-screen justify-center">
         <div className="flex flex-col w-fit gap-[32px] items-center max-w-[386px]">
-          <Header type="h2" className="tracking-wide">Sign up for an account</Header>
+          <Header type="h2" className="w-full">Sign up for an account</Header>
           <div className="flex flex-col w-full h-full gap-[16px]">
             <Input id="email" type="email" placeholder="user@example.com" />
             <NavLink to="/confirm" end tabIndex={-1}>

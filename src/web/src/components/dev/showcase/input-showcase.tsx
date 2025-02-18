@@ -1,6 +1,6 @@
 import React from "react";
-import { Input } from "../input";
-import { Label } from "../typography/label";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/typography/label";
 
 export const InputShowcase = () => {
   return (
@@ -24,5 +24,3 @@ export const InputShowcase = () => {
     </div>
   );
 };
-
-export default InputShowcase;

@@ -1,17 +1,17 @@
 import React from "react";
-import { InputOTPGroup } from "../../ui/input-otp";
-import { InputOTPSlot } from "../../ui/input-otp";
-import { InputOTP } from "../../ui/input-otp";
+import { InputOTPGroup, InputOTPSlot, InputOTP } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
-import { Header } from "../../ui/typography/header";
-import { Body } from "../../ui/typography/body";
-import { Button } from "../../ui/button";
+import { Header } from "@/components/typography/header";
+import { Body } from "@/components/typography/body";
+import { Button } from "@/components/ui/button";
 import { NavLink } from "react-router";
+
+import "./otp-page.style.css";
 
 export const OtpPage = () => {
   return (
     <div className="flex flex-col mx-auto w-fit h-fit gap-[64px] items-center justify-center self-center min-h-screen justify-center">
-        <div className="flex flex-col w-full h-full items-center w-[382px] gap-[32px]">
+        <div className="flex flex-col w-full h-full items-center max-w-[386px] gap-[32px]">
             <Header type="h2" className="w-full">Please verify your email</Header>
             <div className="flex flex-col w-full h-full items-center">
                 <Body type="b4" className="w-full">

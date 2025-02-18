@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Body from "../typography/body";
+import { Body } from "@/components/typography/body";
 
 const FormSchema = z.object({
   username: z.string().min(2, {
@@ -67,5 +67,3 @@ export const FormShowcase = () => {
     </div>
   );
 };
-
-export default FormShowcase;

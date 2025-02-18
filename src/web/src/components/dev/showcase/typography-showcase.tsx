@@ -1,10 +1,8 @@
 import React from "react";
-import { Header } from "../typography/header";
-import Subtitle from "../typography/subtitle";
-import { Caption } from "../typography/caption";
-import { Label } from "../typography/label";
-import { Body } from "../typography/body";
-import { Logo } from "../typography/logo";
+import { Header } from "@/components/typography/header";
+import { Subtitle } from "@/components/typography/subtitle";
+import { Caption } from "@/components/typography/caption";
+import { Label } from "@/components/typography/label";
 
 export const TypographyShowcase = () => {
   return (

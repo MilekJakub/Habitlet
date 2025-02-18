@@ -1,13 +1,12 @@
 import React from "react";
-import Body from "./typography/body";
-import { Heading1 } from "lucide-react";
-import Header from "./typography/header";
+import { Body } from "@/components/typography/body";
+import { Header } from "@/components/typography/header";
 
 interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-class ErrorBoundary extends React.Component<
+export class ErrorBoundary extends React.Component<
   React.PropsWithChildren<{}>,
   ErrorBoundaryState
 > {
@@ -44,4 +43,3 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-export default ErrorBoundary;

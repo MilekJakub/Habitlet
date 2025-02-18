@@ -6,7 +6,7 @@ interface SubtitleProps {
   className?: string;
 }
 
-const Subtitle: React.FC<SubtitleProps> = ({ children, type, className }) => {
+export const Subtitle: React.FC<SubtitleProps> = ({ children, type, className }) => {
   const typeClasses = {
     s1: "text-lg font-semibold",
     s2: "text-base font-semibold",
@@ -17,4 +17,3 @@ const Subtitle: React.FC<SubtitleProps> = ({ children, type, className }) => {
   );
 };
 
-export default Subtitle;

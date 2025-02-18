@@ -18,5 +18,3 @@ export const Caption: React.FC<CaptionProps> = ({
 
   return <div className={`${typeClasses[type]} ${className}`}>{children}</div>;
 };
-
-export default Caption;

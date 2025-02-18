@@ -1,12 +1,14 @@
 import React from "react";
-import { Button } from "../ui/button";
-import { Header } from "../ui/typography/header";
-import ButtonsShowcase from "../ui/showcase/buttonsShowcase";
-import FormShowcase from "../ui/showcase/formShowcase";
-import InputShowcase from "../ui/showcase/inputShowcase";
-import { TypographyShowcase } from "../ui/showcase/typographyShowcase";
+import { Button } from "@/components/ui/button";
+import { Header } from "@/components/typography/header";
+import { ButtonsShowcase } from "@/components/dev/showcase/buttons-showcase";
+import { FormShowcase } from "@/components/dev/showcase/form-showcase";
+import { InputShowcase } from "@/components/dev/showcase/input-showcase";
+import { TypographyShowcase } from "@/components/dev/showcase/typography-showcase";
 import { useState } from "react";
-import { Toaster } from "../ui/toaster";
+import { Toaster } from "@/components/ui/toaster";
+
+import "./dev-page.style.css";
 
 export const DevPage = () => {
   const [showButtons, setShowButtons] = useState(false);

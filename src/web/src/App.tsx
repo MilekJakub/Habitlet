@@ -2,11 +2,12 @@ import React from "react";
 import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router";
-import { WelcomePage } from "./components/userManagement/welcome/welcomePage";
-import { DevPage } from "./components/dev/devPage";
-import { RegistrationPage } from "./components/userManagement/register/registrationPage";
-import { OtpPage } from "./components/userManagement/otp/otpPage";
-import { UserDetailsPage } from "./components/userManagement/details/userDetailsPage";
+import { WelcomePage } from "@/views/auth/welcome/welcome-page";
+import { DevPage } from "@/views/dev/dev-page";
+import { RegistrationPage } from "@/views/auth/register/registration-page";
+import { OtpPage } from "@/views/auth/otp/otp-page";
+import { UserDetailsPage } from "@/views/auth/user-details/user-details-page";
+import { DashboardPage } from "@/views/dashboard/dashboard-page";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/confirm" element={<OtpPage />} />
         <Route path="/details" element={<UserDetailsPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -26,5 +26,3 @@ export const Body: React.FC<BodyProps> = ({
     children
   );
 };
-
-export default Body;
