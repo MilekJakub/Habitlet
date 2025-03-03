@@ -162,3 +162,12 @@ package-lock.json
 
 # CircleCI
 .circleci/generated_config.yml
+
+# Ignore all src/ contents except web/
+src/*
+!src/web/
+
+# Environment variables
+.env
+.env.*
+!.env.example
