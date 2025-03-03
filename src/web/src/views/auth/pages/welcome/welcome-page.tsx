@@ -1,22 +1,36 @@
 import React from "react";
-import { Logo } from "@/components/typography/logo";
+import styled from "styled-components";
+import { NavLink } from "react-router";
+
+import { LogoText } from "@/components/typography/logo";
 import { Header } from "@/components/typography/header";
 import { Button } from "@/components/ui/button";
 import { Subtitle } from "@/components/typography/subtitle";
-import { NavLink } from "react-router";
 
-import "./welcome-page.style.css";
+const Underline = styled.span`
+  text-decoration: underline;
+  text-decoration-color: #1e40af;
+  text-decoration-style: wavy;
+  text-underline-offset: 10%;
+  text-decoration-thickness: 10%;
+`;
+
+const UnderlineCenterText = ({ children, className }: { children: string, className: string }) => {
+  return (
+    <span className={className}>
+      {children.slice(0, 1)}
+      <Underline>{children.slice(1, -1)}</Underline>
+      {children.slice(-1)}
+    </span>
+  );
+};
 
 export const WelcomePage = () => (
-  <div className="flex flex-col mx-auto w-fit h-fit gap-[64px] items-center justify-center self-center min-h-screen justify-center">
+  <div className="flex flex-col mx-auto w-fit h-fit gap-[64px] items-center self-center min-h-screen justify-center">
     <div className="flex flex-col w-fit h-fit gap-[16px]">
-      <Logo className="text-center">HABITLET</Logo>
+      <LogoText className="text-center">HABITLET</LogoText>
       <Header type="h1" className="text-center border-none">
-        Your ownz {" "}
-        <span className="text-yellow-500">
-          s<span className="decoration">ucces</span>s
-        </span>{" "}
-        assistant!
+        Your own <UnderlineCenterText className="text-yellow-500">success</UnderlineCenterText> assistant!
       </Header>
     </div>
 
