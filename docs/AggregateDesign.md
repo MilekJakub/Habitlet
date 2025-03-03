@@ -18,69 +18,6 @@ type Identity = {
 };
 ```
 
-## Goals Context
-**Purpose**: Supports users in achieving their goals.
-**Core Features**: Goal setup, milestone definition, roadmap visualization.
-
-### Aggregates
-
-```typescript
-type Roadmap = {
-  id: RoadmapId;
-  name: RoadmapName;
-  description: RoadmapDescription;
-  createdAt: Date;
-  updatedAt: Date;
-  goal: GoalId;
-  habits: HabitId[];
-  milestones: MilestoneId[];
-  steps: StepId[];
-  sessions: SessionId[];
-};
-```
-
-### Entities
-
-```typescript
-type Goal = {
-  id: GoalId;
-  name: GoalName;
-  description: GoalDescription; // SMART - 5 strings, with validation
-  createdAt: Date;
-  updatedAt: Date;
-  roadmap: RoadmapId;
-  identity: IdentityId;
-  milestones: MilestoneId[];
-  steps: StepId[];
-  sessions: SessionId[];
-};
-```
-
-```typescript
-type Milestone = {
-  id: MilestoneId;
-  name: MilestoneName;
-  description: MilestoneDescription; // SMART - 5 strings, with validation
-  createdAt: Date;
-  updatedAt: Date;
-  goal: GoalId;
-  steps: StepId[];
-  sessions: SessionId[];
-};
-```
-
-```typescript
-type Step = {
-  id: StepId;
-  name: StepName;
-  description: StepDescription; // SMART - 5 strings, with validation
-  createdAt: Date;
-  updatedAt: Date;
-  milestone: MilestoneId;
-  sessions: SessionId[];
-};
-```
-
 ## Habit Development Context
 **Purpose**: Supports users in developing habits.
 **Core Features**: Habit creation.
@@ -91,7 +28,7 @@ type Step = {
 type Habit = {
   id: HabitId;
   name: HabitName;
-  description: HabitDescription; // SMART - 5 strings, with validation
+  description: HabitDescription;
   createdAt: Date;
   updatedAt: Date;
   identity: IdentityId;

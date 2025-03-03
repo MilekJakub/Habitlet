@@ -5,17 +5,27 @@ The key foundation of this application lies in the principles of *Atomic Habits*
 ---
 
 ### Core Concept Flow:
-1. **Define a New Identity**:  
-   To create atomic habits, we need to first establish our new identity.  
-2. **Set a Goal**:  
-   Our identity should be aligned with a clear goal we aim to achieve.  
-3. **Define a Successful Person's Profile**:  
-   Based on the goal, we define the profile of a successful person by answering the question:  
-   *"What kind of person do I need to become to achieve this goal?"*  
+1. **Set a Goal**:
+   The goal should be SMART. This means that it is specific, measurable, achievable, relevant, and time-bound.
+   Our identity should be aligned with a clear goal we aim to achieve.
+
+2. **Create a Roadmap**:
+   The roadmap is a step-by-step plan to achieve the goal. It is created using techniques from Event Storming.
+
+3. **Define a New Identity**:  
+   To create atomic habits, we need to first establish our identity.
+   The identity is a description of the person we want to become.
+   Based on the goal, we define the profile of a successful person by answering the questions like:  
+   *"What kind of person is able to achieve this goal?"*
+   *"What does this person do on a daily basis?"*
+   *"What are the values of this person?"*
+   *"What this person would never do?"*
+
 4. **Analyze Behavior**:  
-   With this identity in mind, we can identify the behaviors and actions of this successful person.  
-5. **Build Personality and Habits**:  
-   From these behaviors, we shape the new personality and create habits that align with it.
+   With this identity in mind, we can identify the behaviors and actions of this successful person.
+
+5. **Build Habits**:
+   From the identified behaviors, we create habits that align with the identity.
 
 ---
 
