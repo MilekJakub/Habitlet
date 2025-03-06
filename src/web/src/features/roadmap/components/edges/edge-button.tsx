@@ -21,9 +21,8 @@ const selector = (id: string) => {
 
 const filterNodes = (node: NodeConfig) => {
   return (
-    node.id === 'transform-node' ||
-    node.id === 'join-node' ||
-    node.id === 'branch-node'
+    node.id === 'step-node' ||
+    node.id === 'milestone-node'
   );
 };
 

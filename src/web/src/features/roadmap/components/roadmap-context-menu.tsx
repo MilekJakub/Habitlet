@@ -11,7 +11,7 @@ import {
 import { RoadmapNodeType } from '@/types/roadmap';
 import { iconMapping } from '@/data/icon-mapping';
 import { useClientPosition } from '@/hooks/use-client-position';
-import { useAppStore } from '@/store';
+import { useAppStore } from '@/store/roadmap.store';
 import { nodesConfig } from '@/data/roadmap-data';
 
 export default function RoadmapContextMenu({ children }: { children: ReactNode }) {
@@ -26,12 +26,15 @@ export default function RoadmapContextMenu({ children }: { children: ReactNode }
     addNodeByType(nodeType, position);
   };
 
+  const nodeTypeOrder = ['start-node', 'step-node', 'milestone-node', 'goal-node'];
+
   return (
     <div className="h-full w-full bg-gray-100" onContextMenu={setPosition}>
       <ContextMenu>
         <ContextMenuTrigger>{children}</ContextMenuTrigger>
         <ContextMenuContent className="w-64">
-          {Object.values(nodesConfig).map((item) => {
+          {nodeTypeOrder.map((nodeType) => {
+            const item = nodesConfig[nodeType as RoadmapNodeType];
             const IconComponent = item?.icon
               ? iconMapping[item.icon]
               : undefined;

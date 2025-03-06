@@ -3,6 +3,7 @@ import { RoadmapNodeProps } from '@/types/roadmap';
 import RoadmapNode from '@/features/roadmap/components/nodes/roadmap-node';
 import { AppHandle } from '@/features/roadmap/components/app-handle';
 import { Position } from '@xyflow/react';
+import { NODE_SIZE } from '@/constants/roadmap-constants';
 
 export const GoalNode = ({ id, data }: RoadmapNodeProps) => {
   return (
@@ -12,7 +13,7 @@ export const GoalNode = ({ id, data }: RoadmapNodeProps) => {
         id="target"
         type="target"
         position={Position.Top}
-        x={100}
+        x={NODE_SIZE.width * 0.5}
         y={0}
       />
     </RoadmapNode>

@@ -26,19 +26,19 @@ const compatibleNodeTypes = (type: 'source' | 'target') => {
   if (type === 'source') {
     return (node: NodeConfig) => {
       return (
-        node.id === 'transform-node' ||
-        node.id === 'join-node' ||
-        node.id === 'branch-node' ||
-        node.id === 'output-node'
+        node.id === 'goal-node' ||
+        node.id === 'milestone-node' ||
+        node.id === 'step-node' ||
+        node.id === 'start-node'
       );
     };
   }
   return (node: NodeConfig) => {
     return (
-      node.id === 'transform-node' ||
-      node.id === 'join-node' ||
-      node.id === 'branch-node' ||
-      node.id === 'initial-node'
+      node.id === 'goal-node' ||
+      node.id === 'milestone-node' ||
+      node.id === 'step-node' ||
+      node.id === 'start-node'
     );
   };
 };
