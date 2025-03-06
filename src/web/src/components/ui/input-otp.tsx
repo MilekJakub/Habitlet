@@ -46,7 +46,9 @@ const InputOTPSlot = React.forwardRef<
       )}
       {...props}
     >
-      <Subtitle type="s1" className="text-center">{char}</Subtitle>
+      <Subtitle type="s1" className="text-center">
+        {char}
+      </Subtitle>
       {hasFakeCaret && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <div className="h-4 w-px animate-caret-blink bg-zinc-950 duration-1000 dark:bg-zinc-50" />
