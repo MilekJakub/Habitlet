@@ -1,14 +1,17 @@
+// TODO: Implement layout components and use them across the app
+// This is a simple example of how layout components should look like
+
 import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div<{ direction: "row" | "column"; gap: string }>`
   display: flex;
-  flex-direction: ${props => props.direction};
-  gap: ${props => props.gap};
+  flex-direction: ${(props) => props.direction};
+  gap: ${(props) => props.gap};
 `;
 
 const Pane = styled.div<{ flex: string }>`
-  flex: ${props => props.flex};
+  flex: ${(props) => props.flex};
 `;
 
 export const Split = ({
