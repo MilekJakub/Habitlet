@@ -2,23 +2,69 @@ import React from "react";
 import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router";
-import { WelcomePage } from "@/views/auth/welcome/welcome-page";
-import { DevPage } from "@/views/dev/dev-page";
-import { RegistrationPage } from "@/views/auth/register/registration-page";
-import { OtpPage } from "@/views/auth/otp/otp-page";
-import { UserDetailsPage } from "@/views/auth/user-details/user-details-page";
-import { DashboardPage } from "@/views/dashboard/dashboard-page";
+import { LandingPage } from "@/features/landing/pages/landing-page";
+import { DevPage } from "@/features/dev/pages/dev-page";
+import { RegistrationFlow } from "@/features/auth/pages/registration-flow";
+import { DashboardPage } from "@/features/dashboard/pages/dashboard-page";
+import { LoginPage } from "./features/auth/pages/login-page";
+import { ProtectedRoute } from "@/features/auth/components/protected-route";
+import { RoadmapPage } from "@/features/roadmap/pages/roadmap-page";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
-        <Route path="/dev" element={<DevPage />} />
-        <Route path="/register" element={<RegistrationPage />} />
-        <Route path="/confirm" element={<OtpPage />} />
-        <Route path="/details" element={<UserDetailsPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute requireAuth={false} redirectTo="/dashboard">
+              <LandingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <ProtectedRoute requireAuth={false} redirectTo="/dashboard">
+              <LoginPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <ProtectedRoute requireAuth={false} redirectTo="/dashboard">
+              <RegistrationFlow />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute requireAuth={true} redirectTo="/">
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/roadmap"
+          element={
+            <ProtectedRoute requireAuth={true} redirectTo="/">
+              <RoadmapPage />
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/dev"
+          element={
+            <ProtectedRoute requireAuth={true} redirectTo="/">
+              <DevPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
