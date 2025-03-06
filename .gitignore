@@ -2,6 +2,10 @@
 
 temp/
 
+# Build output
+dist/
+build/
+
 # Build Folders
 [Bb]in/
 [Oo]bj/
