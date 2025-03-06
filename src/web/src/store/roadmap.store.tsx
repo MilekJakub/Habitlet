@@ -155,36 +155,60 @@ export const createAppStore = (initialState: AppState = defaultState) => {
         targetHandleId,
         position,
       }) => {
+        // Step 1: Create the new node
         const newNodeId = get().addNodeByType(type, position);
         if (!newNodeId) return;
-
-        get().removeEdge(
-          `${source}-${sourceHandleId}-${target}-${targetHandleId}`
-        );
-
+        
+        // Step 2: Get all current edges
+        const currentEdges = get().edges;
+        
+        // Step 3: Create a clean slate for the new edge set
+        let newEdgeSet = [];
+        
+        // Step 4: Carefully copy only edges that are NOT the one we're replacing
+        for (const edge of currentEdges) {
+          // Skip the edge we want to replace
+          if (edge.source === source && 
+              edge.target === target) {
+            // This is the edge we want to replace - don't add it to the new set
+            console.log('Skipping edge:', edge);
+            continue;
+          }
+          
+          // Keep all other edges
+          newEdgeSet.push(edge);
+        }
+        
+        // Step 5: Find the handles for the new node
         const nodeHandles = nodesConfig[type].handles;
-        const nodeSource = nodeHandles.find(
-          (handle) => handle.type === 'source'
-        );
-        const nodeTarget = nodeHandles.find(
-          (handle) => handle.type === 'target'
-        );
-
-        const edges = [];
+        const nodeSource = nodeHandles.find(handle => handle.type === 'source');
+        const nodeTarget = nodeHandles.find(handle => handle.type === 'target');
+        
+        // Step 6: Create the two new edges
         if (nodeTarget && source) {
-          edges.push(
-            createEdge(source, newNodeId, sourceHandleId, nodeTarget.id)
+          // Source → New Node
+          const sourceToNewEdge = createEdge(
+            source, 
+            newNodeId, 
+            sourceHandleId, 
+            nodeTarget.id
           );
+          newEdgeSet.push(sourceToNewEdge);
         }
-
+        
         if (nodeSource && target) {
-          edges.push(
-            createEdge(newNodeId, target, nodeSource.id, targetHandleId)
+          // New Node → Target
+          const newToTargetEdge = createEdge(
+            newNodeId, 
+            target, 
+            nodeSource.id, 
+            targetHandleId
           );
+          newEdgeSet.push(newToTargetEdge);
         }
-
-        const nextEdges = [...get().edges, ...edges];
-        set({ edges: nextEdges });
+        
+        // Step 7: Set the completely new edge set
+        set({ edges: newEdgeSet });
       },
 
       setEdges: (edges) => set({ edges }),

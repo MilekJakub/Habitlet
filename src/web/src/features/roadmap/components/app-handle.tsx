@@ -91,6 +91,19 @@ export const AppHandle = ({
     handleId: id ?? undefined,
   });
 
+  // Get all connections for this node (both incoming and outgoing)
+  const allNodeConnections = useNodeConnections();
+  
+  // Check if this node has any incoming connections
+  const hasIncomingConnections = allNodeConnections.some(
+    conn => conn.target === nodeId
+  );
+  
+  // Check if this node has any outgoing connections
+  const hasOutgoingConnections = allNodeConnections.some(
+    conn => conn.source === nodeId
+  );
+
   const isConnectionInProgress = useConnection((c) => c.inProgress);
 
   const { isOpen, toggleDropdown } = useDropdown();
@@ -127,8 +140,16 @@ export const AppHandle = ({
     [nodeId, id, type, nodePosition, x, y, toggleDropdown, addNodeInBetween]
   );
 
+  // Only show the add button if:
+  // 1. This specific handle doesn't have any connections
+  // 2. For source handles: only show if the node has no outgoing connections
+  // 3. For target handles: only show if the node has no incoming connections
+  // 4. No connection is in progress
+  // 5. Node is not being dragged
   const displayAddButton =
     connections.length === 0 &&
+    ((type === 'source' && !hasOutgoingConnections) || 
+     (type === 'target' && !hasIncomingConnections)) &&
     !isConnectionInProgress &&
     !draggedNodes.has(nodeId);
 
