@@ -7,29 +7,32 @@ import { nanoid } from 'nanoid';
 export const nodesConfig: Record<RoadmapNodeType, NodeConfig> = {
   'initial-node': {
     id: 'initial-node',
-    title: 'Initial Node',
+    title: 'Goal Node',
     status: 'initial',
     handles: [
       {
-        type: 'source',
-        position: Position.Bottom,
+        id: 'target',
+        type: 'target',
+        position: Position.Top,
         x: NODE_SIZE.width * 0.5,
-        y: NODE_SIZE.height,
+        y: 0,
       },
     ],
-    icon: 'Rocket',
+    icon: 'Trophy',
   },
   'transform-node': {
     id: 'transform-node',
     title: 'Transform Node',
     handles: [
       {
+        id: 'source',
         type: 'source',
         position: Position.Bottom,
         x: NODE_SIZE.width * 0.5,
         y: NODE_SIZE.height,
       },
       {
+        id: 'target',
         type: 'target',
         position: Position.Top,
         x: NODE_SIZE.width * 0.5,
@@ -58,6 +61,7 @@ export const nodesConfig: Record<RoadmapNodeType, NodeConfig> = {
         y: 0,
       },
       {
+        id: 'source',
         type: 'source',
         position: Position.Bottom,
         x: NODE_SIZE.width * 0.5,
@@ -72,6 +76,7 @@ export const nodesConfig: Record<RoadmapNodeType, NodeConfig> = {
     status: 'initial',
     handles: [
       {
+        id: 'target',
         type: 'target',
         position: Position.Top,
         x: NODE_SIZE.width * 0.5,
@@ -99,10 +104,11 @@ export const nodesConfig: Record<RoadmapNodeType, NodeConfig> = {
     title: 'Output Node',
     handles: [
       {
-        type: 'target',
-        position: Position.Top,
+        id: 'source',
+        type: 'source',
+        position: Position.Bottom,
         x: NODE_SIZE.width * 0.5,
-        y: 0,
+        y: NODE_SIZE.height,
       },
     ],
     icon: 'CheckCheck',
@@ -140,16 +146,36 @@ export const createNodeByType = ({
 }
 
 export const initialNodes: RoadmapNode[] = [
-  createNodeByType({ type: 'initial-node', id: 'roadmapNode_1' }),
+  createNodeByType({ type: 'transform-node', id: 'roadmapNode_1' }),
   createNodeByType({ type: 'branch-node', id: 'roadmapNode_2' }),
   createNodeByType({ type: 'transform-node', id: 'roadmapNode_3' }),
-  createNodeByType({ type: 'output-node', id: 'roadmapNode_4' }),
-  createNodeByType({ type: 'output-node', id: 'roadmapNode_5' })
+  createNodeByType({ type: 'initial-node', id: 'roadmapNode_4' }),
+  createNodeByType({ type: 'initial-node', id: 'roadmapNode_5' })
 ];
 
 export const initialEdges: RoadmapEdge[] = [
-  createEdge('roadmapNode_1', 'roadmapNode_2'),
-  createEdge('roadmapNode_2', 'roadmapNode_3', 'true'),
-  createEdge('roadmapNode_3', 'roadmapNode_4'),
-  createEdge('roadmapNode_2', 'roadmapNode_5', 'false')
+  createEdge(
+    'roadmapNode_1',
+    'roadmapNode_2',
+    'source',
+    'target'
+  ),
+  createEdge(
+    'roadmapNode_2',
+    'roadmapNode_3',
+    'true',
+    'target'
+  ),
+  createEdge(
+    'roadmapNode_3',
+    'roadmapNode_4',
+    'source',
+    'target'
+  ),
+  createEdge(
+    'roadmapNode_2',
+    'roadmapNode_5',
+    'false',
+    'target'
+  )
 ];

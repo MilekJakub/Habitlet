@@ -4,7 +4,8 @@ import {
   Split,
   Merge,
   CheckCheck,
-  Ban
+  Ban,
+  Trophy
 } from 'lucide-react';
 
 export const iconMapping: Record<
@@ -16,5 +17,6 @@ export const iconMapping: Record<
   Split: Split,
   Merge: Merge,
   CheckCheck: CheckCheck,
-  Ban: Ban
+  Ban: Ban,
+  Trophy: Trophy
 };

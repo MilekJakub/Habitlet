@@ -8,13 +8,13 @@ export const createEdge = (
   source: string,
   target: string,
   sourceHandleId?: string | null,
-  targetHandleid?: string | null
+  targetHandleId?: string | null
 ): RoadmapEdge => ({
-  id: `${source}-${sourceHandleId}-${target}-${targetHandleid}`,
+  id: `${source}-${sourceHandleId}-${target}-${targetHandleId}`,
   source,
   target,
   sourceHandle: sourceHandleId,
-  targetHandle: targetHandleid,
+  targetHandle: targetHandleId,
   type: 'roadmap',
   animated: true,
 });
