@@ -4,10 +4,10 @@ import RoadmapNode from '@/features/roadmap/components/nodes/roadmap-node';
 import { AppHandle } from '@/features/roadmap/components/app-handle';
 import { nodesConfig } from '@/data/roadmap-data';
 
-export const OutputNode = ({ id, data }: RoadmapNodeProps) => {
+export const StartNode = ({ id, data }: RoadmapNodeProps) => {
   return (
     <RoadmapNode id={id} data={data}>
-      {nodesConfig['output-node'].handles.map((handle) => (
+      {nodesConfig['start-node'].handles.map((handle) => (
         <AppHandle
           key={`${handle.type}-${handle.id}`}
           id={handle.id}
@@ -17,7 +17,7 @@ export const OutputNode = ({ id, data }: RoadmapNodeProps) => {
           y={handle.y}
         />
       ))}
-      {/* Implement custom node specific functionality here */}
+      {/* Start-specific content can be added here */}
     </RoadmapNode>
   );
-}
+} 

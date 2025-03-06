@@ -1,22 +1,16 @@
 import {
-  Rocket,
-  Spline,
-  Split,
-  Merge,
-  CheckCheck,
-  Ban,
-  Trophy
+  Trophy,
+  Footprints,
+  Flag,
+  Play
 } from 'lucide-react';
 
 export const iconMapping: Record<
   string,
   React.FC<React.SVGProps<SVGSVGElement>>
 > = {
-  Rocket: Rocket,
-  Spline: Spline,
-  Split: Split,
-  Merge: Merge,
-  CheckCheck: CheckCheck,
-  Ban: Ban,
-  Trophy: Trophy
+  Trophy: Trophy,
+  Footprints: Footprints,
+  Flag: Flag,
+  Play: Play
 };

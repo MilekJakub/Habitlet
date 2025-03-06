@@ -1,17 +1,15 @@
 import { Node, NodeProps } from '@xyflow/react';
 import { iconMapping } from '@/data/icon-mapping';
-import { OutputNode } from '@/features/roadmap/components/nodes/output-node';
-import { InitialNode } from '@/features/roadmap/components/nodes/initial-node';
-import { TransformNode } from '@/features/roadmap/components/nodes/transform-node';
-import { BranchNode } from '@/features/roadmap/components/nodes/branch-node';
-import { JoinNode } from '@/features/roadmap/components/nodes/join-node';
+import { StepNode } from '@/features/roadmap/components/nodes/step-node';
+import { MilestoneNode } from '@/features/roadmap/components/nodes/milestone-node';
+import { GoalNode } from '@/features/roadmap/components/nodes/goal-node';
+import { StartNode } from '@/features/roadmap/components/nodes/start-node';
 
 export const nodeTypes = {
-  'initial-node': InitialNode,
-  'output-node': OutputNode,
-  'transform-node': TransformNode,
-  'branch-node': BranchNode,
-  'join-node': JoinNode,
+  'step-node': StepNode,
+  'milestone-node': MilestoneNode,
+  'goal-node': GoalNode,
+  'start-node': StartNode,
 };
 
 export type RoadmapNodeData = {
@@ -35,10 +33,9 @@ export type NodeConfig = {
 };
 
 export type RoadmapNode =
-  | Node<RoadmapNodeData, 'initial-node'>
-  | Node<RoadmapNodeData, 'transform-node'>
-  | Node<RoadmapNodeData, 'join-node'>
-  | Node<RoadmapNodeData, 'branch-node'>
-  | Node<RoadmapNodeData, 'output-node'>;
+  | Node<RoadmapNodeData, 'step-node'>
+  | Node<RoadmapNodeData, 'milestone-node'>
+  | Node<RoadmapNodeData, 'goal-node'>
+  | Node<RoadmapNodeData, 'start-node'>;
 
 export type RoadmapNodeType = NonNullable<RoadmapNode['type']>;

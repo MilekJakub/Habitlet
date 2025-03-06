@@ -4,10 +4,10 @@ import RoadmapNode from '@/features/roadmap/components/nodes/roadmap-node';
 import { AppHandle } from '@/features/roadmap/components/app-handle';
 import { nodesConfig } from '@/data/roadmap-data';
 
-export const BranchNode = ({ id, data }: RoadmapNodeProps) => {
+export const StepNode = ({ id, data }: RoadmapNodeProps) => {
   return (
     <RoadmapNode id={id} data={data}>
-      {nodesConfig['branch-node'].handles.map((handle) => (
+      {nodesConfig['step-node'].handles.map((handle) => (
         <AppHandle
           key={`${handle.type}-${handle.id}`}
           id={handle.id}
@@ -17,7 +17,7 @@ export const BranchNode = ({ id, data }: RoadmapNodeProps) => {
           y={handle.y}
         />
       ))}
-      {/* Implement custom node specific functionality here */}
+      {/* Step-specific content can be added here */}
     </RoadmapNode>
   );
-}
+} 

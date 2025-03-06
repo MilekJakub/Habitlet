@@ -5,9 +5,9 @@ import { Position, XYPosition } from '@xyflow/react';
 import { nanoid } from 'nanoid';
 
 export const nodesConfig: Record<RoadmapNodeType, NodeConfig> = {
-  'initial-node': {
-    id: 'initial-node',
-    title: 'Goal Node',
+  'goal-node': {
+    id: 'goal-node',
+    title: 'Goal',
     status: 'initial',
     handles: [
       {
@@ -20,9 +20,9 @@ export const nodesConfig: Record<RoadmapNodeType, NodeConfig> = {
     ],
     icon: 'Trophy',
   },
-  'transform-node': {
-    id: 'transform-node',
-    title: 'Transform Node',
+  'step-node': {
+    id: 'step-node',
+    title: 'Step',
     handles: [
       {
         id: 'source',
@@ -39,27 +39,12 @@ export const nodesConfig: Record<RoadmapNodeType, NodeConfig> = {
         y: 0,
       },
     ],
-    icon: 'Spline',
+    icon: 'Footprints',
   },
-  'join-node': {
-    id: 'join-node',
-    title: 'Join Node',
-    status: 'initial',
+  'milestone-node': {
+    id: 'milestone-node',
+    title: 'Milestone',
     handles: [
-      {
-        id: 'true',
-        type: 'target',
-        position: Position.Top,
-        x: NODE_SIZE.width - 25,
-        y: 0,
-      },
-      {
-        id: 'false',
-        type: 'target',
-        position: Position.Top,
-        x: 25,
-        y: 0,
-      },
       {
         id: 'source',
         type: 'source',
@@ -67,14 +52,6 @@ export const nodesConfig: Record<RoadmapNodeType, NodeConfig> = {
         x: NODE_SIZE.width * 0.5,
         y: NODE_SIZE.height,
       },
-    ],
-    icon: 'Split',
-  },
-  'branch-node': {
-    id: 'branch-node',
-    title: 'Branch Node',
-    status: 'initial',
-    handles: [
       {
         id: 'target',
         type: 'target',
@@ -82,26 +59,12 @@ export const nodesConfig: Record<RoadmapNodeType, NodeConfig> = {
         x: NODE_SIZE.width * 0.5,
         y: 0,
       },
-      {
-        id: 'true',
-        type: 'source',
-        position: Position.Bottom,
-        x: 25,
-        y: NODE_SIZE.height,
-      },
-      {
-        id: 'false',
-        type: 'source',
-        position: Position.Bottom,
-        x: NODE_SIZE.width - 25,
-        y: NODE_SIZE.height,
-      },
     ],
-    icon: 'Merge',
+    icon: 'Flag',
   },
-  'output-node': {
-    id: 'output-node',
-    title: 'Output Node',
+  'start-node': {
+    id: 'start-node',
+    title: 'Start',
     handles: [
       {
         id: 'source',
@@ -111,7 +74,7 @@ export const nodesConfig: Record<RoadmapNodeType, NodeConfig> = {
         y: NODE_SIZE.height,
       },
     ],
-    icon: 'CheckCheck',
+    icon: 'Play',
   },
 };
 
@@ -146,11 +109,10 @@ export const createNodeByType = ({
 }
 
 export const initialNodes: RoadmapNode[] = [
-  createNodeByType({ type: 'transform-node', id: 'roadmapNode_1' }),
-  createNodeByType({ type: 'branch-node', id: 'roadmapNode_2' }),
-  createNodeByType({ type: 'transform-node', id: 'roadmapNode_3' }),
-  createNodeByType({ type: 'initial-node', id: 'roadmapNode_4' }),
-  createNodeByType({ type: 'initial-node', id: 'roadmapNode_5' })
+  createNodeByType({ type: 'start-node', id: 'roadmapNode_1' }),
+  createNodeByType({ type: 'step-node', id: 'roadmapNode_2' }),
+  createNodeByType({ type: 'milestone-node', id: 'roadmapNode_3' }),
+  createNodeByType({ type: 'goal-node', id: 'roadmapNode_4' })
 ];
 
 export const initialEdges: RoadmapEdge[] = [
@@ -163,19 +125,13 @@ export const initialEdges: RoadmapEdge[] = [
   createEdge(
     'roadmapNode_2',
     'roadmapNode_3',
-    'true',
+    'source',
     'target'
   ),
   createEdge(
     'roadmapNode_3',
     'roadmapNode_4',
     'source',
-    'target'
-  ),
-  createEdge(
-    'roadmapNode_2',
-    'roadmapNode_5',
-    'false',
     'target'
   )
 ];
