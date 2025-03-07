@@ -33,6 +33,11 @@ function createSourcePort(id: string) {
   };
 }
 
+// Create a safe port ID that doesn't use null values
+function safePortId(nodeId: string, type: 'source' | 'target', handleId: string | null | undefined) {
+  return `${nodeId}-${type}-${handleId || 'default'}`;
+}
+
 function getPorts(node: RoadmapNode) {
   const handles = nodesConfig[node.type!].handles;
 
@@ -42,13 +47,13 @@ function getPorts(node: RoadmapNode) {
   handles?.forEach((handle) => {
     if (handle.type === 'target') {
       targetPorts.push(
-        createTargetPort(`${node.id}-target-${handle.id ?? null}`)
+        createTargetPort(safePortId(node.id, 'target', handle.id))
       );
     }
 
     if (handle.type === 'source') {
       sourcePorts.push(
-        createSourcePort(`${node.id}-source-${handle.id ?? null}`)
+        createSourcePort(safePortId(node.id, 'source', handle.id))
       );
     }
   });
@@ -58,17 +63,35 @@ function getPorts(node: RoadmapNode) {
 
 export async function layoutGraph(nodes: RoadmapNode[], edges: Edge[]) {
   const connectedNodes = new Set();
+  // Keep track of all required ports 
+  const requiredPorts = new Map<string, Set<string>>();
+
+  // First pass: identify all nodes and ports needed for the edges
+  edges.forEach((edge) => {
+    connectedNodes.add(edge.source);
+    connectedNodes.add(edge.target);
+    
+    // Track required source ports
+    if (!requiredPorts.has(edge.source)) {
+      requiredPorts.set(edge.source, new Set());
+    }
+    requiredPorts.get(edge.source)?.add(safePortId(edge.source, 'source', edge.sourceHandle));
+    
+    // Track required target ports
+    if (!requiredPorts.has(edge.target)) {
+      requiredPorts.set(edge.target, new Set());
+    }
+    requiredPorts.get(edge.target)?.add(safePortId(edge.target, 'target', edge.targetHandle));
+  });
 
   const graph: ElkNode = {
     id: 'root',
     layoutOptions,
     edges: edges.map((edge) => {
-      connectedNodes.add(edge.source);
-      connectedNodes.add(edge.target);
       return {
         id: edge.id,
-        sources: [`${edge.source}-source-${edge.sourceHandle ?? null}`],
-        targets: [`${edge.target}-target-${edge.targetHandle ?? null}`],
+        sources: [safePortId(edge.source, 'source', edge.sourceHandle)],
+        targets: [safePortId(edge.target, 'target', edge.targetHandle)],
       };
     }),
     children: nodes.reduce<ElkNode[]>((acc, node) => {
@@ -77,12 +100,39 @@ export async function layoutGraph(nodes: RoadmapNode[], edges: Edge[]) {
       }
 
       const { targetPorts, sourcePorts } = getPorts(node);
+      
+      // Create a set of all port IDs we already have
+      const existingPortIds = new Set([
+        ...targetPorts.map(p => p.id),
+        ...sourcePorts.map(p => p.id)
+      ]);
+      
+      // Add any missing required ports
+      const additionalPorts: ElkPort[] = [];
+      const nodeRequiredPorts = requiredPorts.get(node.id);
+      
+      if (nodeRequiredPorts) {
+        nodeRequiredPorts.forEach(portId => {
+          if (!existingPortIds.has(portId)) {
+            if (portId.includes('-target-')) {
+              additionalPorts.push(createTargetPort(portId));
+            } else if (portId.includes('-source-')) {
+              additionalPorts.push(createSourcePort(portId));
+            }
+          }
+        });
+      }
+
       acc.push({
         id: node.id,
-        // TODO: we could use intial sizes here
         width: node.width ?? node.measured?.width ?? 150,
         height: node.height ?? node.measured?.height ?? 50,
-        ports: [createSourcePort(node.id), ...targetPorts, ...sourcePorts],
+        ports: [
+          createSourcePort(node.id), 
+          ...targetPorts, 
+          ...sourcePorts,
+          ...additionalPorts // Add any missing ports required by edges
+        ],
         layoutOptions: {
           'org.eclipse.elk.portConstraints': 'FIXED_ORDER',
         },
