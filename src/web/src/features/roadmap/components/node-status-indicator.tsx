@@ -1,8 +1,11 @@
 import React, { ReactNode } from "react";
 import clsx from "clsx";
+import { GoalStatus } from "@/types/goal";
+import { MilestoneStatus } from "@/types/milestone";
+import { StepStatus } from "@/types/step";
 
 export type NodeStatusIndicatorProps = {
-  status?: "loading" | "success" | "error" | "initial";
+  status?: GoalStatus | MilestoneStatus | StepStatus;
   children: ReactNode;
 };
 
@@ -61,14 +64,16 @@ export const NodeStatusIndicator = ({
   children,
 }: NodeStatusIndicatorProps) => {
   switch (status) {
-    case "loading":
-      return <LoadingIndicator>{children}</LoadingIndicator>;
-    case "success":
-      return (
-        <StatusBorder className="border-emerald-600">{children}</StatusBorder>
-      );
-    case "error":
-      return <StatusBorder className="border-red-400">{children}</StatusBorder>;
+    case "locked":
+      return <StatusBorder className="border-zinc-50">{children}</StatusBorder>
+    case "unlocked":
+      return <StatusBorder className="border-zinc-600">{children}</StatusBorder>
+    case "in_progress":
+      return <StatusBorder className="border-yellow-400">{children}</StatusBorder>;
+    case "completed":
+      return <StatusBorder className="border-green-400">{children}</StatusBorder>;
+    case "skipped":
+      return <StatusBorder className="border-gray-400">{children}</StatusBorder>;
     default:
       return <>{children}</>;
   }

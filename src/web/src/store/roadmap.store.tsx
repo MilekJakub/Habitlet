@@ -17,11 +17,12 @@ import {
   RoadmapNodeType
 } from '@/types/roadmap';
 import { RoadmapEdge, createEdge } from '@/features/roadmap/components/edges/roadmap-edge';
-import { createNodeByType, nodesConfig, initialNodes, initialEdges } from '@/data/roadmap-data';
+import { createNodeByType, nodesConfig } from '@/data/roadmap-data';
 import { layoutGraph } from './layout';
 import React, { createContext, useContext, useRef, ReactNode } from 'react';
+import { RoadmapNodeData } from '@/types/roadmap';
 
-export type AppState = {
+export type RoadmapState = {
   nodes: RoadmapNode[];
   edges: RoadmapEdge[];
   colorMode: ColorMode;
@@ -46,7 +47,7 @@ export type ConnectionHandle = {
   handle?: string | null;
 };
 
-export type AppActions = {
+export type RoadmapActions = {
   toggleDarkMode: () => void;
   toggleLayout: () => void;
   onNodesChange: OnNodesChange<RoadmapNode>;
@@ -86,9 +87,9 @@ export type AppActions = {
   onInit: () => void;
 };
 
-export type AppStore = AppState & AppActions;
+export type RoadmapStore = RoadmapState & RoadmapActions;
 
-export const defaultState: AppState = {
+export const defaultState: RoadmapState = {
   nodes: [],
   edges: [],
   colorMode: 'light',
@@ -98,16 +99,55 @@ export const defaultState: AppState = {
   potentialConnection: undefined,
 };
 
-export const createAppStore = (initialState: AppState = defaultState) => {
-  const store = create<AppStore>()(
+// Add an interface for the initial data
+export interface RoadmapData {
+  goal: RoadmapNodeData;
+  milestones: RoadmapNodeData[];
+  steps: RoadmapNodeData[];
+  dependencies: RoadmapEdge[];
+}
+
+export const createRoadmapStore = (initialData?: RoadmapData) => {
+  const store = create<RoadmapStore>()(
     subscribeWithSelector((set, get) => ({
-      ...initialState,
+      ...defaultState,
 
       onInit: () => {
-        set({
-          nodes: initialNodes.map((node: RoadmapNode) => ({ ...node, style: { opacity: 0 } })),
-          edges: initialEdges.map((edge: RoadmapEdge) => ({ ...edge, style: { opacity: 0 } })),
+        if (!initialData || !initialData.goal) return;
+        
+        const nodes: RoadmapNode[] = [];
+        const edges: RoadmapEdge[] = [];
+
+        nodes.push({ 
+          id: initialData.goal.id,
+          type: 'goal-node',
+          data: initialData.goal,
+          position: { x: 0, y: 0 },
         });
+
+        initialData.milestones.forEach((milestone) => {
+          nodes.push({ 
+            id: milestone.id,
+            type: 'milestone-node',
+            data: milestone,
+            position: { x: 0, y: 0 },
+          });
+        });
+
+        initialData.steps.forEach((step) => {
+          nodes.push({ 
+            id: step.id,
+            type: 'step-node',
+            data: step,
+            position: { x: 0, y: 0 },
+          });
+        });
+
+        initialData.dependencies.forEach((dependency) => {
+          edges.push(dependency);
+        });
+
+        set({ nodes, edges });
       },
 
       onNodesChange: async (changes) => {
@@ -306,41 +346,40 @@ export const createAppStore = (initialState: AppState = defaultState) => {
   return store;
 };
 
-export type AppStoreApi = ReturnType<typeof createAppStore>;
+export type RoadmapStoreApi = ReturnType<typeof createRoadmapStore>;
 
-export const AppStoreContext = createContext<AppStoreApi | undefined>(
+export const RoadmapStoreContext = createContext<RoadmapStoreApi | undefined>(
   undefined
 );
 
-export interface AppStoreProviderProps {
+export interface RoadmapStoreProviderProps {
   children: ReactNode;
-  initialState?: AppState;
+  initialData?: RoadmapData;
 }
 
-export const AppStoreProvider = ({
+export const RoadmapStoreProvider = ({
   children,
-  initialState,
-}: AppStoreProviderProps) => {
-  const storeRef = useRef<AppStoreApi>();
-  if (!storeRef.current) {
-    storeRef.current = createAppStore(initialState);
-    // Initialize the store with data after creation
-    storeRef.current.getState().onInit();
+  initialData
+}: RoadmapStoreProviderProps) => {
+  const store = useRef<RoadmapStoreApi>();
+  
+  if (!store.current) {
+    store.current = createRoadmapStore(initialData);
   }
-
+  
   return (
-    <AppStoreContext.Provider value={storeRef.current}>
+    <RoadmapStoreContext.Provider value={store.current}>
       {children}
-    </AppStoreContext.Provider>
+    </RoadmapStoreContext.Provider>
   );
 };
 
-export const useAppStore = <T,>(selector: (store: AppStore) => T): T => {
-  const appStoreContext = useContext(AppStoreContext);
+export const useRoadmapStore = <T,>(selector: (store: RoadmapStore) => T): T => {
+  const roadmapStoreContext = useContext(RoadmapStoreContext);
 
-  if (!appStoreContext) {
-    throw new Error(`useAppStore must be used within AppStoreProvider`);
+  if (!roadmapStoreContext) {
+    throw new Error(`useRoadmapStore must be used within RoadmapStoreProvider`);
   }
 
-  return useStore(appStoreContext, selector);
+  return useStore(roadmapStoreContext, selector);
 };

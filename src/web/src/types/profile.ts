@@ -1,5 +1,5 @@
 import { Entity } from "@/types/entity";
 
-export interface Profile extends Entity {
+export interface ProfileEntity extends Entity {
   username: string;
 }

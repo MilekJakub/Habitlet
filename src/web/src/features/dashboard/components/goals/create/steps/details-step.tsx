@@ -9,8 +9,17 @@ import {
 } from "@/components/ui/select";
 import { TagInput } from "@/components/ui/tag-input";
 import { GoalSummary } from "../goal-summary";
-import { StepProps } from "../types";
-import { CATEGORIES, PRIORITIES, MAX_TAGS } from "../../../../../../constants/goals-constants";
+import { GOAL_CATEGORIES, GOAL_PRIORITIES, MAX_TAGS } from "@/constants/goals-constants";
+import { createGoalInputSchema } from "../create-goal.schema";
+import { z } from "zod";
+
+type FormData = z.infer<typeof createGoalInputSchema>;
+
+type StepProps = {
+  formData: FormData;
+  updateFormData: (field: keyof FormData, value: unknown) => void;
+  validationErrors: Record<string, string>;
+};
 
 export const DetailsStep = ({ formData, updateFormData, validationErrors }: StepProps) => {
   const selectRef = React.useRef<HTMLButtonElement>(null);
@@ -54,9 +63,9 @@ export const DetailsStep = ({ formData, updateFormData, validationErrors }: Step
               <SelectValue placeholder="Select a category" />
             </SelectTrigger>
             <SelectContent>
-              {CATEGORIES.map((category) => (
+              {GOAL_CATEGORIES.map((category: string) => (
                 <SelectItem key={category} value={category}>
-                  {category}
+                  {category.charAt(0).toUpperCase() + category.slice(1)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -81,7 +90,7 @@ export const DetailsStep = ({ formData, updateFormData, validationErrors }: Step
               <SelectValue placeholder="Select a priority" />
             </SelectTrigger>
             <SelectContent>
-              {PRIORITIES.map((priority) => (
+              {GOAL_PRIORITIES.map((priority: string) => (
                 <SelectItem key={priority} value={priority}>
                   {priority.charAt(0).toUpperCase() + priority.slice(1)}
                 </SelectItem>

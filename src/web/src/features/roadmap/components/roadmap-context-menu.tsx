@@ -11,12 +11,12 @@ import {
 import { RoadmapNodeType } from '@/types/roadmap';
 import { iconMapping } from '@/data/icon-mapping';
 import { useClientPosition } from '@/hooks/use-client-position';
-import { useAppStore } from '@/store/roadmap.store';
+import { useRoadmapStore } from '@/store/roadmap.store';
 import { nodesConfig } from '@/data/roadmap-data';
 
 export default function RoadmapContextMenu({ children }: { children: ReactNode }) {
   const [position, setPosition] = useClientPosition();
-  const addNodeByType = useAppStore((s) => s.addNodeByType);
+  const addNodeByType = useRoadmapStore((s) => s.addNodeByType);
 
   const onItemClick = (nodeType: RoadmapNodeType) => {
     if (!position) {
@@ -26,7 +26,7 @@ export default function RoadmapContextMenu({ children }: { children: ReactNode }
     addNodeByType(nodeType, position);
   };
 
-  const nodeTypeOrder = ['start-node', 'step-node', 'milestone-node', 'goal-node'];
+  const nodeTypeOrder = ['step-node', 'milestone-node'];
 
   return (
     <div className="h-full w-full bg-gray-100" onContextMenu={setPosition}>

@@ -8,7 +8,7 @@ export const nodesConfig: Record<RoadmapNodeType, NodeConfig> = {
   'goal-node': {
     id: 'goal-node',
     title: 'Goal',
-    status: 'initial',
+    status: 'unlocked',
     handles: [
       {
         id: 'target',

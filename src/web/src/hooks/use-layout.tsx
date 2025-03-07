@@ -3,10 +3,10 @@ import { useReactFlow } from '@xyflow/react';
 import { useShallow } from 'zustand/react/shallow';
 
 import { layoutGraph } from '@/store/layout';
-import { useAppStore } from '@/store/roadmap.store';
-import { AppStore } from '@/store/roadmap.store';
+import { useRoadmapStore } from '@/store/roadmap.store';
+import { RoadmapStore } from '@/store/roadmap.store';
 
-const selector = (state: AppStore) => ({
+const selector = (state: RoadmapStore) => ({
   getNodes: state.getNodes,
   setNodes: state.setNodes,
   getEdges: state.getEdges,
@@ -15,7 +15,7 @@ const selector = (state: AppStore) => ({
 
 export const useLayout = (shouldFitView: boolean = false): (() => Promise<void>) => {
   const { fitView } = useReactFlow();
-  const { getNodes, getEdges, setNodes, setEdges } = useAppStore(
+  const { getNodes, getEdges, setNodes, setEdges } = useRoadmapStore(
     useShallow(selector)
   );
 

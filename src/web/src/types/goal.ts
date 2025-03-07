@@ -1,22 +1,35 @@
 import { Entity } from "@/types/entity";
 
+export type GoalCategory =
+  | "work"
+  | "personal"
+  | "health"
+  | "finance"
+  | "education"
+  | "family"
+  | "social"
+  | "spiritual"
+  | "home";
+
 export type GoalStatus =
-  | "not_started"
+  | "locked"
+  | "unlocked"
   | "in_progress"
-  | "completed"
-  | "cancelled";
+  | "completed";
 
 export type GoalPriority = "low" | "medium" | "high";
 
-export interface Goal extends Entity {
+export interface GoalEntity extends Entity {
+  id: string;
   title: string;
   description?: string;
-  category: string;
+  category: GoalCategory;
   target_date?: string;
-  progress: number;
   status: GoalStatus;
   priority: GoalPriority;
   user_id: string;
+  created_at: string;
+  updated_at: string;
   is_archived: boolean;
   tags?: string[];
 }

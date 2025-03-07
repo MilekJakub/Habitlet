@@ -13,21 +13,28 @@ export const nodeTypes = {
 };
 
 export type RoadmapNodeData = {
-  title?: string;
-  label?: string;
-  icon?: keyof typeof iconMapping;
-  status?: 'loading' | 'success' | 'error' | 'initial';
+  id: string;
+  type: 'step-node' | 'milestone-node' | 'goal-node' | 'start-node';
+  title: string;
+  label: string;
+  icon: keyof typeof iconMapping;
+  status:
+  | "locked"
+  | "unlocked"
+  | "in_progress"
+  | "completed"
+  | "skipped";
 };
 
 export type RoadmapNodeProps = NodeProps<Node<RoadmapNodeData>> & {
   type: RoadmapNodeType;
   children?: React.ReactNode;
 };
- 
+
 export type NodeConfig = {
   id: RoadmapNodeType;
   title: string;
-  status?: 'loading' | 'success' | 'error' | 'initial';
+  status?: 'locked' | 'unlocked' | 'in_progress' | 'completed' | 'skipped';
   handles: NonNullable<Node['handles']>;
   icon: keyof typeof iconMapping;
 };

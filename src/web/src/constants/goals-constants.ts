@@ -1,3 +1,7 @@
+import { createGoalInputSchema } from "@/features/dashboard/components/goals/create/create-goal.schema";
+import { GoalStatus, GoalPriority, GoalCategory } from "@/types/goal";
+import { z } from "zod";
+
 export const ACTIONS = [
   "Oversee",
   "Update",
@@ -22,47 +26,43 @@ export const ACTIONS = [
   "Administer",
 ];
 
-export const CATEGORIES = [
-  "Work",
-  "Personal",
-  "Health",
-  "Finance",
-  "Education",
-  "Family",
-  "Social",
-  "Spiritual",
-  "Home",
-  "Other",
-];
+type FormData = z.infer<typeof createGoalInputSchema>;
 
-export const PRIORITIES = [
-  "low",
-  "medium",
-  "high",
-];
-
-export const STATUSES = [
-  "not_started",
-  "in_progress",
-  "completed",
-  "cancelled",
-];
-
-export const MAX_TAGS = 5;
-
-export const INITIAL_CREATE_GOAL_FORM_DATA = {
+export const INITIAL_CREATE_GOAL_FORM_DATA : FormData = {
   title: "",
+  description: "",
   action: "",
   what: "",
   when: new Date(),
   where: "",
   which: "",
   why: "",
-  description: "",
-  category: "",
-  priority: "" as "" | "low" | "medium" | "high",
+  category: "personal" as GoalCategory,
+  priority: "medium" as GoalPriority,
   tags: [] as string[],
-  status: "not_started" as "not_started" | "in_progress" | "completed" | "cancelled",
-  progress: 0,
+  status: "unlocked" as GoalStatus,
   is_archived: false
-}; 
+};
+
+export const GOAL_CATEGORIES = [
+  "work",
+  "personal",
+  "health",
+  "finance",
+  "education",
+  "family",
+  "social",
+  "spiritual",
+  "home",
+] as const;
+
+export const GOAL_STATUSES = [
+  "locked",
+  "unlocked",
+  "in_progress",
+  "completed",
+] as const;
+
+export const MAX_TAGS = 5;
+
+export const GOAL_PRIORITIES = ["low", "medium", "high"] as const;

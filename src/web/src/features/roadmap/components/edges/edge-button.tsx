@@ -4,15 +4,15 @@ import { EdgeLabelRenderer, EdgeProps } from '@xyflow/react';
 import { Button } from '@/components/ui/button';
 import { useDropdown } from '@/hooks/use-dropdown';
 import { RoadmapDropdownMenu } from '@/features/roadmap/components/roadmap-dropdown-menu';
-import { useAppStore } from '@/store/roadmap.store';
+import { useRoadmapStore } from '@/store/roadmap.store';
 import { RoadmapNodeType, NodeConfig } from '@/types/roadmap';
 import { RoadmapEdge } from '@/features/roadmap/components/edges/roadmap-edge';
-import { AppStore } from '@/store/roadmap.store';
+import { RoadmapStore } from '@/store/roadmap.store';
 import { useShallow } from 'zustand/react/shallow';
 import clsx from 'clsx';
 
 const selector = (id: string) => {
-  return (state: AppStore) => ({
+  return (state: RoadmapStore) => ({
     addNodeInBetween: state.addNodeInBetween,
     connectionSites: state.connectionSites,
     isPotentialConnection: state.potentialConnection?.id === `edge-${id}`,
@@ -44,7 +44,7 @@ export const EdgeButton = ({
   style: CSSProperties;
 }) => {
   const { addNodeInBetween, connectionSites, isPotentialConnection } =
-    useAppStore(useShallow(selector(id)));
+    useRoadmapStore(useShallow(selector(id)));
   const { isOpen, toggleDropdown, ref } = useDropdown();
 
   const onAddNode = useCallback(

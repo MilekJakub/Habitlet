@@ -3,7 +3,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Body } from "@/components/typography/body";
 import { GoalSummary } from "../goal-summary";
-import { StepProps } from "../types";
+import { createGoalInputSchema } from "../create-goal.schema";
+import { z } from "zod";
+
+type FormData = z.infer<typeof createGoalInputSchema>;
+
+type StepProps = {
+  formData: FormData;
+  updateFormData: (field: keyof FormData, value: unknown) => void;
+  validationErrors: Record<string, string>;
+};
 
 export const TitleStep = ({ formData, updateFormData, validationErrors }: StepProps) => {
   const inputRef = React.useRef<HTMLInputElement>(null);

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Header } from "@/components/typography/header";
 import { MainLayout } from "@/layout/main-layout";
-import { CreateGoal } from "@/features/dashboard/components/goals/create-goal-form/goal-creation-form";
+import { CreateGoal } from "@/features/dashboard/components/goals/create/goal-creation-form";
 import { GoalCard } from "@/features/dashboard/components/goals/goal-card";
 import { supabase } from "@/lib/supabase";
-import type { Goal } from "@/types/goal";
+import type { GoalEntity } from "@/types/goal";
 import { Loader2 } from "lucide-react";
 import { Inbox } from "lucide-react";
 import { Body } from "@/components/typography/body";
+import { Button } from "@/components/ui/button";
 
 export const DashboardPage = () => {
-  const [goals, setGoals] = useState<Goal[]>([]);
+  const [goals, setGoals] = useState<GoalEntity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   useEffect(() => {
     const fetchGoals = async () => {
@@ -36,7 +38,7 @@ export const DashboardPage = () => {
     fetchGoals();
   }, []);
 
-  const handleEdit = (goal: Goal) => {
+  const handleEdit = (goal: GoalEntity) => {
     console.log("Edit goal:", goal);
   };
 
@@ -78,6 +80,11 @@ export const DashboardPage = () => {
   return (
     <MainLayout>
       <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <Header type="h3" className="border-none">My Goals</Header>
+          <Button onClick={() => setIsFormOpen(true)}>Create a goal</Button>
+        </div>
+        <CreateGoal isOpen={isFormOpen} setIsOpen={setIsFormOpen} onSuccess={() => window.location.reload()} />
         {isLoading ? (
           <div className="flex justify-center items-center h-full">
             <Loader2 className="animate-spin" size={24} />
@@ -91,7 +98,6 @@ export const DashboardPage = () => {
             <Body type="b1" className="mt-2 mb-6 max-w-md text-zinc-600 dark:text-zinc-400">
               You don't have any goals yet. Create your first goal to start tracking your progress and building better habits.
             </Body>
-            <CreateGoal onSuccess={() => window.location.reload()} />
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

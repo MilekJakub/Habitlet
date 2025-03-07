@@ -6,7 +6,7 @@ export type NavigationResponse = {
   data?: {
     profile: {username: string};
     identities: {name: string}[];
-    goals: {title: string}[];
+    goals: {id: string, title: string}[];
   };
 }
 
@@ -25,7 +25,7 @@ export class NavigationService {
 
       const { data: goalsData, error: goalsError } = await supabase
         .from("goals")
-        .select("title")
+        .select("id, title")
         .eq("user_id", userId);
 
       if (goalsError) {
@@ -37,6 +37,7 @@ export class NavigationService {
       };
 
       const goals = goalsData.map((goal) => ({
+        id: goal.id,
         title: goal.title
       }));
 

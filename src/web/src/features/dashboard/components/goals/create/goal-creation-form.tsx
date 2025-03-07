@@ -9,27 +9,31 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { createGoal } from "../../../api/create-goal";
-import { createGoalInputSchema } from "@/features/dashboard/schemas/create-goal.schema";
+import { createGoalInputSchema } from "./create-goal.schema";
 import { format } from "date-fns";
 import { useAuth } from "@/store/auth.store";
-import { FormData, CreateGoalProps } from "./types";
 import { INITIAL_CREATE_GOAL_FORM_DATA } from "@/constants/goals-constants";
-import {
-  TitleStep,
-  ActionStep,
-  WhatStep,
-  WhenStep,
-  WhereStep,
-  WhichStep,
-  WhyStep,
-  DetailsStep
-} from "./steps";
+import { TitleStep } from "./steps/title-step";
+import { ActionStep } from "./steps/action-step";
+import { WhatStep } from "./steps/what-step";
+import { WhenStep } from "./steps/when-step";
+import { WhereStep } from "./steps/where-step";
+import { WhichStep } from "./steps/which-step";
+import { WhyStep } from "./steps/why-step";
+import { DetailsStep } from "./steps/details-step";
 
-export const CreateGoal = ({ onSuccess }: CreateGoalProps) => {
+type FormData = z.infer<typeof createGoalInputSchema>;
+
+type CreateGoalProps = {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  onSuccess?: () => void;
+}
+
+export const CreateGoal = ( { isOpen, setIsOpen, onSuccess }: CreateGoalProps ) => {
   const { toast } = useToast();
   const { user } = useAuth();
   const [step, setStep] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState<FormData>(INITIAL_CREATE_GOAL_FORM_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
@@ -176,7 +180,7 @@ export const CreateGoal = ({ onSuccess }: CreateGoalProps) => {
           return false;
         }
         
-        if (formData.priority === "") {
+        if (!formData.priority) {
           setValidationErrors({ priority: "Please select a priority" });
           return false;
         }
@@ -245,7 +249,6 @@ export const CreateGoal = ({ onSuccess }: CreateGoalProps) => {
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>Create a goal</Button>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="flex-1 overflow-y-auto px-6 py-4 max-w-3xl">
           <DialogTitle>Create a goal</DialogTitle>

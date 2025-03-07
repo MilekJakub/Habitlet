@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { format } from "date-fns";
 import {
   Card,
@@ -16,11 +16,11 @@ import {
   Trash2,
   Archive,
 } from "lucide-react";
-import type { Goal } from "@/types/goal";
+import type { GoalEntity } from "@/types/goal";
 
 interface GoalCardProps {
-  goal: Goal;
-  onEdit: (goal: Goal) => void;
+  goal: GoalEntity;
+  onEdit: (goal: GoalEntity) => void;
   onDelete: (id: string) => void;
   onArchive: (id: string, isArchived: boolean) => void;
 }
@@ -55,7 +55,7 @@ export const GoalCard = ({
             <Badge variant="outline" className={priorityColors[goal.priority]}>
               {goal.priority.charAt(0).toUpperCase() + goal.priority.slice(1)}
             </Badge>
-            <Badge variant="secondary">{goal.category}</Badge>
+            <Badge variant="secondary">{goal.category.charAt(0).toUpperCase() + goal.category.slice(1)}</Badge>
           </div>
         </div>
       </CardHeader>
@@ -74,10 +74,10 @@ export const GoalCard = ({
 
         <div className="mb-2">
           <div className="flex justify-between mb-1">
-            <span className="text-sm font-medium">Progress</span>
-            <span className="text-sm font-medium">{goal.progress}%</span>
+            <span className="text-sm font-medium">Progress (this needs to be dynamic)</span>
+            <span className="text-sm font-medium">{50}%</span>
           </div>
-          <Progress value={goal.progress} className="h-2" />
+          <Progress value={50} className="h-2" />
         </div>
       </CardContent>
 

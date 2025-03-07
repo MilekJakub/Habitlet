@@ -1,14 +1,13 @@
 import { Entity } from "@/types/entity";
 
-export type DependencyType = "goal" | "step";
-export type DependencyStrength = "strong" | "medium" | "weak";
+export type DependencyType = "goal" | "milestone" | "step";
 
-export interface Dependency extends Entity {
+export interface DependencyEntity extends Entity {
+  id: string;
   source_id: string;
   source_type: DependencyType;
   target_id: string;
   target_type: DependencyType;
-  dependency_type: string;
-  description?: string;
-  strength: DependencyStrength;
+  created_at: string;
+  updated_at: string;
 }

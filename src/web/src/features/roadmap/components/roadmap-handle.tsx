@@ -12,7 +12,7 @@ import {
   XYPosition,
 } from '@xyflow/react';
 
-import { type AppStore } from '@/store/roadmap.store';
+import { type RoadmapStore } from '@/store/roadmap.store';
 
 import { type RoadmapNodeType, NodeConfig } from '@/types/roadmap';
 import { Button } from '@/components/ui/button';
@@ -20,31 +20,17 @@ import { ButtonHandle } from '@/features/roadmap/components/button-handle';
 import { RoadmapDropdownMenu } from '@/features/roadmap/components/roadmap-dropdown-menu';
 
 import { useDropdown } from '@/hooks/use-dropdown';
-import { useAppStore } from '@/store/roadmap.store';
+import { useRoadmapStore } from '@/store/roadmap.store';
 
 const compatibleNodeTypes = (type: 'source' | 'target') => {
-  if (type === 'source') {
-    return (node: NodeConfig) => {
-      return (
-        node.id === 'goal-node' ||
-        node.id === 'milestone-node' ||
-        node.id === 'step-node' ||
-        node.id === 'start-node'
-      );
-    };
-  }
+  // For both source and target, only show milestone and step nodes
   return (node: NodeConfig) => {
-    return (
-      node.id === 'goal-node' ||
-      node.id === 'milestone-node' ||
-      node.id === 'step-node' ||
-      node.id === 'start-node'
-    );
+    return node.id === 'milestone-node' || node.id === 'step-node';
   };
 };
 
 const selector =
-  (nodeId: string, type: string, id?: string | null) => (state: AppStore) => ({
+  (nodeId: string, type: string, id?: string | null) => (state: RoadmapStore) => ({
     addNodeInBetween: state.addNodeInBetween,
     draggedNodes: state.draggedNodes,
     connectionSites: state.connectionSites,
@@ -69,7 +55,7 @@ function getIndicatorPostion(
 
 const fallbackPosition = { x: 0, y: 0 };
 
-export const AppHandle = ({
+export const RoadmapHandle = ({
   className,
   position: handlePosition,
   type,
@@ -112,7 +98,7 @@ export const AppHandle = ({
     addNodeInBetween,
     connectionSites,
     isPotentialConnection,
-  } = useAppStore(useShallow(selector(nodeId, type, id)));
+  } = useRoadmapStore(useShallow(selector(nodeId, type, id)));
 
   // We get the actual position of the node
   const nodePosition =

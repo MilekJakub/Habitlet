@@ -1,18 +1,18 @@
 import { Entity } from "@/types/entity";
 
 export type MilestoneStatus =
-  | "not_started"
-  | "in_progress"
-  | "completed"
-  | "cancelled";
+| "locked"
+| "unlocked"
+| "in_progress"
+| "completed";
 
-export interface Milestone extends Entity {
+export interface MilestoneEntity extends Entity {
+  id: string;
   title: string;
   description?: string;
   goal_id: string;
-  target_date?: string;
-  reached_date?: string;
+  completed_date?: string;
   status: MilestoneStatus;
-  criteria: string;
-  reward?: string;
+  created_at: string;
+  updated_at: string;
 }

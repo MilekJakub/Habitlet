@@ -70,10 +70,6 @@ const fallbackData = {
           url: "#",
         },
         {
-          title: "Identities",
-          url: "#",
-        },
-        {
           title: "Habits",
           url: "#",
         }
@@ -136,11 +132,7 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
                 items: [
                   {
                     title: "Goals",
-                    url: "#",
-                  },
-                  {
-                    title: "Identities",
-                    url: "#",
+                    url: "/goals",
                   },
                   {
                     title: "Habits",
@@ -153,9 +145,9 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
                 url: "#",
                 icon: Map,
                 items: goals.map((goal) => ({
-                title: goal.title,
-                url: "#"
-              }))
+                  title: goal.title,
+                  url: `/roadmap/${goal.id}`
+                }))
             }];
 
             const userNavItem = {

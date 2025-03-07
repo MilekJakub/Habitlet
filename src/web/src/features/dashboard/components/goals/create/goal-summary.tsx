@@ -2,9 +2,12 @@ import React from "react";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { X } from "lucide-react";
-import { FormData } from "./types";
+import { createGoalInputSchema } from "./create-goal.schema";
+import { z } from "zod";
 
-type GoalSummaryProps = { 
+type FormData = z.infer<typeof createGoalInputSchema>;
+
+export type GoalSummaryProps = { 
   formData: FormData; 
   onRemoveTag?: (tag: string) => void 
 };
@@ -39,7 +42,7 @@ export const GoalSummary = ({ formData, onRemoveTag }: GoalSummaryProps) => (
       <div>
         <span className="text-sm text-gray-600">Tags: </span>
         <div className="flex flex-wrap gap-1 mt-2">
-          {formData.tags.map((tag) => (
+          {formData.tags.map((tag: string) => (
             <Badge
               key={tag}
               variant="secondary"

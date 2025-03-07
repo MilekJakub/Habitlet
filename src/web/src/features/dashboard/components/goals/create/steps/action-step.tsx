@@ -8,8 +8,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { GoalSummary } from "../goal-summary";
-import { StepProps } from "../types";
-import { ACTIONS } from "../../../../../../constants/goals-constants";
+import { ACTIONS } from "@/constants/goals-constants";
+import { createGoalInputSchema } from "../create-goal.schema";
+import { z } from "zod";
+
+type FormData = z.infer<typeof createGoalInputSchema>;
+
+type StepProps = {
+  formData: FormData;
+  updateFormData: (field: keyof FormData, value: unknown) => void;
+  validationErrors: Record<string, string>;
+};
 
 export const ActionStep = ({ formData, updateFormData, validationErrors }: StepProps) => {
   const selectRef = React.useRef<HTMLButtonElement>(null);
