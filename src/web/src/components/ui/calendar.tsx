@@ -63,5 +63,5 @@ export const Calendar = ({
       {...props}
     />
   );
-}
+};
 Calendar.displayName = "Calendar";

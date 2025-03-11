@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import React, { useCallback, useEffect } from 'react';
-import clsx from 'clsx';
-import { useShallow } from 'zustand/react/shallow';
+import { useRoadmapStore } from "@/store/useRoadmapStore";
+import React, { useCallback, useEffect } from "react";
+import clsx from "clsx";
+import { useShallow } from "zustand/react/shallow";
 import {
   Position,
   useConnection,
@@ -10,27 +11,23 @@ import {
   useNodeConnections,
   useNodeId,
   XYPosition,
-} from '@xyflow/react';
+} from "@xyflow/react";
+import { type RoadmapStore } from "@/store/roadmap.store";
+import { NodeConfig, RoadmapNode } from "@/types/roadmap";
+import { Button } from "@/components/ui/button";
+import { ButtonHandle } from "@/features/roadmap/components/button-handle";
+import { RoadmapDropdownMenu } from "@/features/roadmap/components/roadmap-dropdown-menu";
+import { useDropdown } from "@/hooks/use-dropdown";
 
-import { type RoadmapStore } from '@/store/roadmap.store';
-
-import { type RoadmapNodeType, NodeConfig } from '@/types/roadmap';
-import { Button } from '@/components/ui/button';
-import { ButtonHandle } from '@/features/roadmap/components/button-handle';
-import { RoadmapDropdownMenu } from '@/features/roadmap/components/roadmap-dropdown-menu';
-
-import { useDropdown } from '@/hooks/use-dropdown';
-import { useRoadmapStore } from '@/store/roadmap.store';
-
-const compatibleNodeTypes = (type: 'source' | 'target') => {
-  // For both source and target, only show milestone and step nodes
+const compatibleNodeTypes = () => {
   return (node: NodeConfig) => {
-    return node.id === 'milestone-node' || node.id === 'step-node';
+    return node.id === "milestone-node" || node.id === "step-node";
   };
 };
 
 const selector =
-  (nodeId: string, type: string, id?: string | null) => (state: RoadmapStore) => ({
+  (nodeId: string, type: string, id?: string | null) =>
+  (state: RoadmapStore) => ({
     addNodeInBetween: state.addNodeInBetween,
     draggedNodes: state.draggedNodes,
     connectionSites: state.connectionSites,
@@ -39,14 +36,14 @@ const selector =
   });
 
 // TODO: we need to streamline how we calculate the yOffset
-const yOffset = (type: 'source' | 'target') => (type === 'source' ? 50 : -65);
+const yOffset = (type: "source" | "target") => (type === "source" ? 50 : -65);
 
-function getIndicatorPostion(
+function getIndicatorPosition(
   nodePosition: XYPosition,
   x: number,
   y: number,
-  type: 'source' | 'target'
-) {
+  type: "source" | "target"
+): XYPosition {
   return {
     x: nodePosition.x + x,
     y: nodePosition.y + y + yOffset(type),
@@ -64,41 +61,35 @@ export const RoadmapHandle = ({
   y,
 }: {
   className?: string;
-  id?: string | null;
-  type: 'source' | 'target';
+  id?: string;
+  type: "source" | "target";
   position: Position;
   x: number;
   y: number;
 }) => {
-  const nodeId = useNodeId() ?? '';
+  const nodeId = useNodeId() ?? "";
 
   const connections = useNodeConnections({
     handleType: type,
-    handleId: id ?? undefined,
+    handleId: id,
   });
 
-  // Get all connections for this node (both incoming and outgoing)
   const allNodeConnections = useNodeConnections();
-  
-  // Check if this node has any incoming connections
+
   const hasIncomingConnections = allNodeConnections.some(
-    conn => conn.target === nodeId
+    (conn) => conn.target === nodeId
   );
-  
-  // Check if this node has any outgoing connections
+
   const hasOutgoingConnections = allNodeConnections.some(
-    conn => conn.source === nodeId
+    (conn) => conn.source === nodeId
   );
 
   const isConnectionInProgress = useConnection((c) => c.inProgress);
 
   const { isOpen, toggleDropdown } = useDropdown();
-  const {
-    draggedNodes,
-    addNodeInBetween,
-    connectionSites,
-    isPotentialConnection,
-  } = useRoadmapStore(useShallow(selector(nodeId, type, id)));
+  const { draggedNodes, addNodeInBetween, connectionSites } = useRoadmapStore(
+    useShallow(selector(nodeId, type, id))
+  );
 
   // We get the actual position of the node
   const nodePosition =
@@ -109,16 +100,18 @@ export const RoadmapHandle = ({
   };
 
   const onAddNode = useCallback(
-    (nodeType: RoadmapNodeType) => {
+    (node: RoadmapNode) => {
       if (!nodeId) {
         return;
       }
 
       addNodeInBetween({
-        type: nodeType,
-        [type]: nodeId,
-        [`${type}HandleId`]: id,
-        position: getIndicatorPostion(nodePosition, x, y, type),
+        newNode: node,
+        source: type === "source" ? nodeId : undefined,
+        target: type === "target" ? nodeId : undefined,
+        sourceHandleId: type === "source" ? id : undefined,
+        targetHandleId: type === "target" ? id : undefined,
+        position: getIndicatorPosition(nodePosition, x, y, type),
       });
 
       toggleDropdown();
@@ -134,8 +127,8 @@ export const RoadmapHandle = ({
   // 5. Node is not being dragged
   const displayAddButton =
     connections.length === 0 &&
-    ((type === 'source' && !hasOutgoingConnections) || 
-     (type === 'target' && !hasIncomingConnections)) &&
+    ((type === "source" && !hasOutgoingConnections) ||
+      (type === "target" && !hasIncomingConnections)) &&
     !isConnectionInProgress &&
     !draggedNodes.has(nodeId);
 
@@ -143,7 +136,7 @@ export const RoadmapHandle = ({
   useEffect(() => {
     if (displayAddButton) {
       connectionSites.set(connectionId, {
-        position: getIndicatorPostion(nodePosition, x, y, type),
+        position: getIndicatorPosition(nodePosition, x, y, type),
         [type]: {
           node: nodeId,
           handle: id,
@@ -171,7 +164,7 @@ export const RoadmapHandle = ({
       type={type}
       position={handlePosition}
       id={id}
-      className={clsx('left-[-6px] top-[-6px]', className)}
+      className={clsx("left-[-6px] top-[-6px]", className)}
       style={{ transform: `translate(${x}px, ${y}px)` }}
       showButton={displayAddButton}
     >
@@ -187,10 +180,10 @@ export const RoadmapHandle = ({
         <div className="absolute z-50 mt-2 left-1/2 transform -translate-x-1/2">
           <RoadmapDropdownMenu
             onAddNode={onAddNode}
-            filterNodes={compatibleNodeTypes(type)}
+            filterNodes={compatibleNodeTypes()}
           />
         </div>
       )}
     </ButtonHandle>
   );
-}
+};

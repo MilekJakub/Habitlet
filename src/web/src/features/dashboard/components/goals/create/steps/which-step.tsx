@@ -13,13 +13,17 @@ type StepProps = {
   validationErrors: Record<string, string>;
 };
 
-export const WhichStep = ({ formData, updateFormData, validationErrors }: StepProps) => {
+export const WhichStep = ({
+  formData,
+  updateFormData,
+  validationErrors,
+}: StepProps) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
-  
+
   React.useEffect(() => {
     inputRef.current?.focus();
   }, []);
-  
+
   return (
     <div className="space-y-4">
       <p className="text-gray-600">
@@ -41,11 +45,16 @@ export const WhichStep = ({ formData, updateFormData, validationErrors }: StepPr
         {validationErrors?.which && (
           <p className="text-sm text-red-500">{validationErrors.which}</p>
         )}
-        <GoalSummary 
-          formData={formData} 
-          onRemoveTag={(tag) => updateFormData("tags", formData.tags?.filter(t => t !== tag) || [])} 
+        <GoalSummary
+          formData={formData}
+          onRemoveTag={(tag) =>
+            updateFormData(
+              "tags",
+              formData.tags?.filter((t) => t !== tag) || []
+            )
+          }
         />
       </div>
     </div>
   );
-}; 
+};

@@ -1,23 +1,37 @@
-import React from 'react';
-import { RoadmapNodeProps } from '@/types/roadmap';
-import RoadmapNode from '@/features/roadmap/components/nodes/roadmap-node';
-import { RoadmapHandle } from '@/features/roadmap/components/roadmap-handle';
-import { nodesConfig } from '@/data/roadmap-data';
+import React from "react";
+import {
+  RoadmapNodeComponent,
+  RoadmapNodeComponentProps,
+} from "@/features/roadmap/components/nodes/roadmap-node";
+import { RoadmapHandle } from "@/features/roadmap/components/roadmap-handle";
+import { nodesConfig } from "@/data/roadmap-data";
 
-export const StartNode = ({ id, data }: RoadmapNodeProps) => {
+export const StartNodeComponent = ({ id, data }: RoadmapNodeComponentProps) => {
   return (
-    <RoadmapNode id={id} data={data}>
-      {nodesConfig['start-node'].handles.map((handle) => (
+    <RoadmapNodeComponent
+      id={id}
+      data={data}
+      type={data.type}
+      dragging={false}
+      zIndex={0}
+      selectable={true}
+      deletable={true}
+      selected={false}
+      draggable={true}
+      isConnectable={true}
+      positionAbsoluteX={0}
+      positionAbsoluteY={0}
+    >
+      {nodesConfig["start-node"].handles.map((handle) => (
         <RoadmapHandle
           key={`${handle.type}-${handle.id}`}
-          id={handle.id}
+          id={handle.id ? handle.id : undefined}
           type={handle.type}
           position={handle.position}
           x={handle.x}
           y={handle.y}
         />
       ))}
-      {/* Start-specific content can be added here */}
-    </RoadmapNode>
+    </RoadmapNodeComponent>
   );
-} 
+};

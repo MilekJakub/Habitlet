@@ -1,13 +1,28 @@
-import React from 'react';
-import { RoadmapNodeProps } from '@/types/roadmap';
-import RoadmapNode from '@/features/roadmap/components/nodes/roadmap-node';
-import { RoadmapHandle } from '@/features/roadmap/components/roadmap-handle';
-import { Position } from '@xyflow/react';
-import { NODE_SIZE } from '@/constants/roadmap-constants';
+import React from "react";
+import {
+  RoadmapNodeComponent,
+  RoadmapNodeComponentProps,
+} from "@/features/roadmap/components/nodes/roadmap-node";
+import { RoadmapHandle } from "@/features/roadmap/components/roadmap-handle";
+import { Position } from "@xyflow/react";
+import { NODE_SIZE } from "@/constants/roadmap-constants";
 
-export const GoalNode = ({ id, data }: RoadmapNodeProps) => {
+export const GoalNode = ({ id, data }: RoadmapNodeComponentProps) => {
   return (
-    <RoadmapNode id={id} data={{...data, label: data.label || 'Goal'}}>
+    <RoadmapNodeComponent
+      id={id}
+      data={data}
+      type={data.type}
+      dragging={false}
+      zIndex={0}
+      selectable={true}
+      deletable={true}
+      selected={false}
+      draggable={true}
+      isConnectable={true}
+      positionAbsoluteX={0}
+      positionAbsoluteY={0}
+    >
       <RoadmapHandle
         key="target"
         id="target"
@@ -16,6 +31,6 @@ export const GoalNode = ({ id, data }: RoadmapNodeProps) => {
         x={NODE_SIZE.width * 0.5}
         y={0}
       />
-    </RoadmapNode>
+    </RoadmapNodeComponent>
   );
-} 
+};

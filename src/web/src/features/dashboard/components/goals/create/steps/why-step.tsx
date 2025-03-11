@@ -13,18 +13,20 @@ type StepProps = {
   validationErrors: Record<string, string>;
 };
 
-export const WhyStep = ({ formData, updateFormData, validationErrors }: StepProps) => {
+export const WhyStep = ({
+  formData,
+  updateFormData,
+  validationErrors,
+}: StepProps) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
-  
+
   React.useEffect(() => {
     inputRef.current?.focus();
   }, []);
-  
+
   return (
     <div className="space-y-4">
-      <p className="text-gray-600">
-        Why is this goal important to you?
-      </p>
+      <p className="text-gray-600">Why is this goal important to you?</p>
       <div className="space-y-2">
         <Label htmlFor="why">
           Why <span className="text-red-500">*</span>
@@ -41,11 +43,16 @@ export const WhyStep = ({ formData, updateFormData, validationErrors }: StepProp
         {validationErrors?.why && (
           <p className="text-sm text-red-500">{validationErrors.why}</p>
         )}
-        <GoalSummary 
-          formData={formData} 
-          onRemoveTag={(tag) => updateFormData("tags", formData.tags?.filter(t => t !== tag) || [])} 
+        <GoalSummary
+          formData={formData}
+          onRemoveTag={(tag) =>
+            updateFormData(
+              "tags",
+              formData.tags?.filter((t) => t !== tag) || []
+            )
+          }
         />
       </div>
     </div>
   );
-}; 
+};

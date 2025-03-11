@@ -1,10 +1,8 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import {
   FormControl,
-  FormField,
   FormItem,
   FormLabel,
   FormMessage,
@@ -24,7 +22,12 @@ interface AuthInputProps {
   onPasswordToggle?: () => void;
   showPassword?: boolean;
   error?: string;
-  register?: UseFormRegister<any>;
+  register?: UseFormRegister<{
+    email: string;
+    password: string;
+    username: string;
+    otp: string;
+  }>;
 }
 
 export const AuthInput: React.FC<AuthInputProps> = ({
@@ -57,7 +60,7 @@ export const AuthInput: React.FC<AuthInputProps> = ({
             onChange={onChange}
             required={required}
             disabled={disabled}
-            {...register?.(id)}
+            {...register}
           />
           {showPasswordToggle &&
             (showPassword ? (
@@ -77,5 +80,3 @@ export const AuthInput: React.FC<AuthInputProps> = ({
     </FormItem>
   );
 };
-
-export default AuthInput;

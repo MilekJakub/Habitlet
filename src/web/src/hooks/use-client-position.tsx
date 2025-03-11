@@ -1,9 +1,9 @@
-import { useState, MouseEvent } from 'react';
-import { useReactFlow, XYPosition } from '@xyflow/react';
+import { useState, MouseEvent } from "react";
+import { useReactFlow, XYPosition } from "@xyflow/react";
 
 export const useClientPosition = (): [
   XYPosition | null,
-  (e: MouseEvent) => void
+  (e: MouseEvent) => void,
 ] => {
   const [position, _setPosition] = useState<XYPosition | null>(null);
   const { screenToFlowPosition } = useReactFlow();
@@ -11,4 +11,4 @@ export const useClientPosition = (): [
     _setPosition(screenToFlowPosition({ x: e.clientX, y: e.clientY }));
 
   return [position, setPosition];
-}
+};

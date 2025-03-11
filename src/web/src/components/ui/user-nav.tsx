@@ -44,4 +44,4 @@ export const UserNav = () => {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};

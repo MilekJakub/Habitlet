@@ -7,9 +7,9 @@ import { z } from "zod";
 
 type FormData = z.infer<typeof createGoalInputSchema>;
 
-export type GoalSummaryProps = { 
-  formData: FormData; 
-  onRemoveTag?: (tag: string) => void 
+export type GoalSummaryProps = {
+  formData: FormData;
+  onRemoveTag?: (tag: string) => void;
 };
 
 export const GoalSummary = ({ formData, onRemoveTag }: GoalSummaryProps) => (
@@ -35,7 +35,10 @@ export const GoalSummary = ({ formData, onRemoveTag }: GoalSummaryProps) => (
     {formData.priority && (
       <div className="mb-2">
         <span className="text-sm text-gray-600">Priority: </span>
-        <span className="text-sm font-medium">{formData.priority.charAt(0).toUpperCase() + formData.priority.slice(1)}</span>
+        <span className="text-sm font-medium">
+          {formData.priority.charAt(0).toUpperCase() +
+            formData.priority.slice(1)}
+        </span>
       </div>
     )}
     {formData.tags && formData.tags.length > 0 && (
@@ -61,4 +64,4 @@ export const GoalSummary = ({ formData, onRemoveTag }: GoalSummaryProps) => (
       </div>
     )}
   </div>
-); 
+);

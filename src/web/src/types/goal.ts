@@ -11,11 +11,7 @@ export type GoalCategory =
   | "spiritual"
   | "home";
 
-export type GoalStatus =
-  | "locked"
-  | "unlocked"
-  | "in_progress"
-  | "completed";
+export type GoalStatus = "locked" | "unlocked" | "in_progress" | "completed";
 
 export type GoalPriority = "low" | "medium" | "high";
 

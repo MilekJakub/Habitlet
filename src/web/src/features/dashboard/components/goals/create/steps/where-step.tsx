@@ -13,18 +13,20 @@ type StepProps = {
   validationErrors: Record<string, string>;
 };
 
-export const WhereStep = ({ formData, updateFormData, validationErrors }: StepProps) => {
+export const WhereStep = ({
+  formData,
+  updateFormData,
+  validationErrors,
+}: StepProps) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
-  
+
   React.useEffect(() => {
     inputRef.current?.focus();
   }, []);
-  
+
   return (
     <div className="space-y-4">
-      <p className="text-gray-600">
-        Where will you work on this goal?
-      </p>
+      <p className="text-gray-600">Where will you work on this goal?</p>
       <div className="space-y-2">
         <Label htmlFor="where">
           Where <span className="text-red-500">*</span>
@@ -41,11 +43,16 @@ export const WhereStep = ({ formData, updateFormData, validationErrors }: StepPr
         {validationErrors?.where && (
           <p className="text-sm text-red-500">{validationErrors.where}</p>
         )}
-        <GoalSummary 
-          formData={formData} 
-          onRemoveTag={(tag) => updateFormData("tags", formData.tags?.filter(t => t !== tag) || [])} 
+        <GoalSummary
+          formData={formData}
+          onRemoveTag={(tag) =>
+            updateFormData(
+              "tags",
+              formData.tags?.filter((t) => t !== tag) || []
+            )
+          }
         />
       </div>
     </div>
   );
-}; 
+};

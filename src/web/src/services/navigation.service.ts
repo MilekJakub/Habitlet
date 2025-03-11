@@ -4,11 +4,11 @@ export type NavigationResponse = {
   success: boolean;
   error?: Error;
   data?: {
-    profile: {username: string};
-    identities: {name: string}[];
-    goals: {id: string, title: string}[];
+    profile: { username: string };
+    identities: { name: string }[];
+    goals: { id: string; title: string }[];
   };
-}
+};
 
 export class NavigationService {
   static async getUserNavigation(userId: string): Promise<NavigationResponse> {
@@ -33,12 +33,12 @@ export class NavigationService {
       }
 
       const profile = {
-        username: profileData.username || "User"
+        username: profileData.username || "User",
       };
 
       const goals = goalsData.map((goal) => ({
         id: goal.id,
-        title: goal.title
+        title: goal.title,
       }));
 
       return {
@@ -46,7 +46,7 @@ export class NavigationService {
         data: {
           profile,
           identities: [{ name: "Default" }],
-          goals
+          goals,
         },
       };
     } catch (error) {

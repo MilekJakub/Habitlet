@@ -20,4 +20,4 @@ export const SearchForm = ({ ...props }: React.ComponentProps<"form">) => {
       </div>
     </form>
   );
-}
+};

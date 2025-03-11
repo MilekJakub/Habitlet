@@ -3,14 +3,14 @@ import { Label } from "@/components/ui/label";
 import { Input } from "./input";
 import { useToast } from "@/hooks/use-toast";
 
-export const TagInput = ({ 
-  tags = [], 
-  onAddTag, 
-  maxTags 
+export const TagInput = ({
+  tags = [],
+  onAddTag,
+  maxTags,
 }: {
-  tags: string[], 
-  onAddTag: (tag: string) => void, 
-  maxTags: number 
+  tags: string[];
+  onAddTag: (tag: string) => void;
+  maxTags: number;
 }) => {
   const [tagInput, setTagInput] = useState("");
   const { toast } = useToast();
@@ -35,9 +35,7 @@ export const TagInput = ({
 
   return (
     <div>
-      <Label htmlFor="tags">
-        Tags
-      </Label>
+      <Label htmlFor="tags">Tags</Label>
       <div className="mb-2 mt-2">
         <Input
           id="tags"

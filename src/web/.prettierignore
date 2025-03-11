@@ -3,3 +3,9 @@
 **/.svn
 **/.hg
 **/node_modules
+**/dist
+**/build
+**/coverage
+**/logs
+**/temp
+**/cache

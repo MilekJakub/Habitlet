@@ -1,9 +1,4 @@
-import {
-  Trophy,
-  Footprints,
-  Flag,
-  Play
-} from 'lucide-react';
+import { Trophy, Footprints, Flag, Play } from "lucide-react";
 
 export const iconMapping: Record<
   string,
@@ -12,5 +7,5 @@ export const iconMapping: Record<
   Trophy: Trophy,
   Footprints: Footprints,
   Flag: Flag,
-  Play: Play
+  Play: Play,
 };

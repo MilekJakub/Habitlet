@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
   SidebarMenu,
@@ -39,10 +39,7 @@ export const IdentitySwitcher = ({
     return (
       <SidebarMenu>
         <SidebarMenuItem>
-          <SidebarMenuButton
-            size="lg"
-            disabled
-          >
+          <SidebarMenuButton size="lg" disabled>
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
               <Loader2 className="size-4 animate-spin" />
             </div>
@@ -114,4 +111,4 @@ export const IdentitySwitcher = ({
       </SidebarMenuItem>
     </SidebarMenu>
   );
-}
+};

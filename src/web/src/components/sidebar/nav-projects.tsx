@@ -85,4 +85,4 @@ export const NavGoals = ({
       </SidebarMenu>
     </SidebarGroup>
   );
-}
+};

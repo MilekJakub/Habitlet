@@ -13,12 +13,12 @@ interface AuthState {
   isLoading: boolean;
   isRegistering: boolean;
   tempEmail: string | null;
-  
+
   setUser: (user: User | null) => void;
   setIsLoading: (isLoading: boolean) => void;
   setTempEmail: (email: string | null) => void;
   setIsRegistering: (isRegistering: boolean) => void;
-  
+
   signUpWithEmail: (email: string) => Promise<AuthResponse>;
   signInWithEmail: (
     email: string,
@@ -39,28 +39,29 @@ interface AuthState {
   checkSession: () => Promise<void>;
 }
 
-export const useAuthStore = create<AuthState>((set, get) => ({
+export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   isAuthenticated: false,
   isLoading: true,
   isRegistering: false,
   tempEmail: null,
-  
-  setUser: (user) => set({ 
-    user, 
-    isAuthenticated: !!user 
-  }),
+
+  setUser: (user) =>
+    set({
+      user,
+      isAuthenticated: !!user,
+    }),
   setIsLoading: (isLoading) => set({ isLoading }),
   setTempEmail: (tempEmail) => set({ tempEmail }),
   setIsRegistering: (isRegistering) => set({ isRegistering }),
-  
+
   checkSession: async () => {
     set({ isLoading: true });
     try {
       const { user } = await AuthService.getSession();
       set({
         user: user || null,
-        isAuthenticated: !!user
+        isAuthenticated: !!user,
       });
     } catch (error) {
       console.error("Error checking session:", error);
@@ -69,35 +70,35 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       set({ isLoading: false });
     }
   },
-  
+
   signUpWithEmail: async (email) => {
     set({ tempEmail: email, isRegistering: true });
     return await AuthService.signUpWithEmail({ email });
   },
-  
+
   signInWithEmail: async (email, password) => {
     const result = await AuthService.signInWithEmail({ email, password });
     if (result.success && result.data?.user) {
       set({
         user: result.data.user,
         isAuthenticated: true,
-        isRegistering: false
+        isRegistering: false,
       });
     }
     return result;
   },
-  
+
   verifyOtp: async (email, token) => {
     const result = await AuthService.verifyOtp({ email, token });
     if (result.success && result.data?.user) {
       set({
         user: result.data.user,
-        isAuthenticated: true
+        isAuthenticated: true,
       });
     }
     return result;
   },
-  
+
   updateUserDetails: async (username, password, userId) => {
     const result = await AuthService.updateUserDetails({
       username,
@@ -109,7 +110,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
     return result;
   },
-  
+
   signInWithGoogle: async () => {
     const result = await AuthService.signInWithGoogle();
     if (result.success) {
@@ -117,12 +118,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
     return result;
   },
-  
+
   resetPassword: async (email) => {
     set({ tempEmail: email });
     return await AuthService.resetPassword(email);
   },
-  
+
   signOut: async () => {
     const result = await AuthService.signOut();
     if (result.success) {
@@ -130,7 +131,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         user: null,
         isAuthenticated: false,
         tempEmail: null,
-        isRegistering: false
+        isRegistering: false,
       });
     }
     return result;
@@ -138,22 +139,26 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 }));
 
 export const initializeAuthListener = () => {
-  const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+  const {
+    data: { subscription },
+  } = supabase.auth.onAuthStateChange((_event, session) => {
     useAuthStore.setState({
       user: session?.user || null,
       isAuthenticated: !!session?.user,
-      isLoading: false
+      isLoading: false,
     });
   });
 
   useAuthStore.getState().checkSession();
-  
+
   return () => {
     subscription.unsubscribe();
   };
 };
 
-export const AuthInitializer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthInitializer: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   useEffect(() => {
     const cleanup = initializeAuthListener();
     return cleanup;

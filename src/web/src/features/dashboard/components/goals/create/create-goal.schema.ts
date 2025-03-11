@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { 
-  GOAL_CATEGORIES, 
-  GOAL_PRIORITIES, 
-  GOAL_STATUSES 
+import {
+  GOAL_CATEGORIES,
+  GOAL_PRIORITIES,
+  GOAL_STATUSES,
 } from "@/constants/goals-constants";
 
 export const createGoalInputSchema = z.object({

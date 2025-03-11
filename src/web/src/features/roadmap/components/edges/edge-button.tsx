@@ -1,15 +1,13 @@
-import React, { CSSProperties, useCallback, useEffect } from 'react';
-import { EdgeLabelRenderer, EdgeProps } from '@xyflow/react';
+import { useRoadmapStore } from "@/store/useRoadmapStore";
+import React, { CSSProperties, useCallback, useEffect } from "react";
+import { EdgeLabelRenderer, EdgeProps } from "@xyflow/react";
 
-import { Button } from '@/components/ui/button';
-import { useDropdown } from '@/hooks/use-dropdown';
-import { RoadmapDropdownMenu } from '@/features/roadmap/components/roadmap-dropdown-menu';
-import { useRoadmapStore } from '@/store/roadmap.store';
-import { RoadmapNodeType, NodeConfig } from '@/types/roadmap';
-import { RoadmapEdge } from '@/features/roadmap/components/edges/roadmap-edge';
-import { RoadmapStore } from '@/store/roadmap.store';
-import { useShallow } from 'zustand/react/shallow';
-import clsx from 'clsx';
+import { Button } from "@/components/ui/button";
+import { useDropdown } from "@/hooks/use-dropdown";
+import { RoadmapDropdownMenu } from "@/features/roadmap/components/roadmap-dropdown-menu";
+import { NodeConfig, RoadmapEdge, RoadmapNode } from "@/types/roadmap";
+import { RoadmapStore } from "@/store/roadmap.store";
+import { useShallow } from "zustand/react/shallow";
 
 const selector = (id: string) => {
   return (state: RoadmapStore) => ({
@@ -20,10 +18,7 @@ const selector = (id: string) => {
 };
 
 const filterNodes = (node: NodeConfig) => {
-  return (
-    node.id === 'step-node' ||
-    node.id === 'milestone-node'
-  );
+  return node.id === "step-node" || node.id === "milestone-node";
 };
 
 export const EdgeButton = ({
@@ -37,20 +32,21 @@ export const EdgeButton = ({
   style,
 }: Pick<
   EdgeProps<RoadmapEdge>,
-  'source' | 'target' | 'sourceHandleId' | 'targetHandleId' | 'id'
+  "source" | "target" | "sourceHandleId" | "targetHandleId" | "id"
 > & {
   x: number;
   y: number;
   style: CSSProperties;
 }) => {
-  const { addNodeInBetween, connectionSites, isPotentialConnection } =
-    useRoadmapStore(useShallow(selector(id)));
+  const { addNodeInBetween, connectionSites } = useRoadmapStore(
+    useShallow(selector(id))
+  );
   const { isOpen, toggleDropdown, ref } = useDropdown();
 
   const onAddNode = useCallback(
-    (type: RoadmapNodeType) => {
+    (node: RoadmapNode) => {
       addNodeInBetween({
-        type,
+        newNode: node,
         source,
         target,
         sourceHandleId: sourceHandleId ?? undefined,
@@ -116,12 +112,15 @@ export const EdgeButton = ({
           style={{
             top: `${y}px`,
             left: `${x}px`,
-            transform: 'translate(-50%, -50%)',
+            transform: "translate(-50%, -50%)",
           }}
         >
-          <RoadmapDropdownMenu onAddNode={onAddNode} filterNodes={filterNodes} />
+          <RoadmapDropdownMenu
+            onAddNode={onAddNode}
+            filterNodes={filterNodes}
+          />
         </div>
       )}
     </EdgeLabelRenderer>
   );
-}
+};

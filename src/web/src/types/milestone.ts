@@ -1,10 +1,10 @@
 import { Entity } from "@/types/entity";
 
 export type MilestoneStatus =
-| "locked"
-| "unlocked"
-| "in_progress"
-| "completed";
+  | "locked"
+  | "unlocked"
+  | "in_progress"
+  | "completed";
 
 export interface MilestoneEntity extends Entity {
   id: string;

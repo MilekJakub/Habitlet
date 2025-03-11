@@ -1,4 +1,9 @@
-import React, { forwardRef, useCallback, HTMLAttributes, ReactNode } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  HTMLAttributes,
+  ReactNode,
+} from "react";
 import { useNodeId, useReactFlow } from "@xyflow/react";
 import { EllipsisVertical, Trash } from "lucide-react";
 
@@ -29,11 +34,11 @@ export const NodeHeader = forwardRef<HTMLElement, NodeHeaderProps>(
           "flex items-center justify-between gap-2 px-3 py-2",
           // Remove or modify these classes if you modify the padding in the
           // `<BaseNode />` component.
-          className,
+          className
         )}
       />
     );
-  },
+  }
 );
 
 NodeHeader.displayName = "NodeHeader";
@@ -74,7 +79,7 @@ export const NodeHeaderIcon = forwardRef<HTMLSpanElement, NodeHeaderIconProps>(
     return (
       <span ref={ref} {...props} className={cn(className, "[&>*]:size-5")} />
     );
-  },
+  }
 );
 
 NodeHeaderIcon.displayName = "NodeHeaderIcon";
@@ -96,7 +101,7 @@ export const NodeHeaderActions = forwardRef<
       {...props}
       className={cn(
         "ml-auto flex items-center gap-1 justify-self-end",
-        className,
+        className
       )}
     />
   );
@@ -184,7 +189,11 @@ export const NodeHeaderDeleteAction = () => {
   }, [id, setNodes]);
 
   return (
-    <NodeHeaderAction onClick={handleClick} variant="primaryOutline" label="Delete node">
+    <NodeHeaderAction
+      onClick={handleClick}
+      variant="primaryOutline"
+      label="Delete node"
+    >
       <Trash />
     </NodeHeaderAction>
   );

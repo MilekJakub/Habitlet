@@ -1,12 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  BookOpen,
-  User,
-  Map,
-  Home
-} from "lucide-react";
+import { BookOpen, User, Map, Home } from "lucide-react";
 
 import { NavMain } from "@/components/sidebar/nav-main";
 import { NavUser } from "@/components/sidebar/nav-user";
@@ -55,8 +50,8 @@ const fallbackData = {
   identityNavItems: [
     {
       name: "Default",
-      logo: User
-    }
+      logo: User,
+    },
   ],
   mainNavItems: [
     {
@@ -72,7 +67,7 @@ const fallbackData = {
         {
           title: "Habits",
           url: "#",
-        }
+        },
       ],
     },
     {
@@ -93,9 +88,9 @@ const fallbackData = {
         {
           title: "Get Started",
           url: "#",
-        }
+        },
       ],
-    }
+    },
   ],
   userNavItem: {
     username: "User",
@@ -105,10 +100,13 @@ const fallbackData = {
   },
 };
 
-export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
+export const AppSidebar = ({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) => {
   const { user, isAuthenticated } = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [navigationData, setNavigationData] = useState<NavigationData>(fallbackData);
+  const [navigationData, setNavigationData] =
+    useState<NavigationData>(fallbackData);
 
   useEffect(() => {
     async function loadUserNavigation() {
@@ -121,7 +119,7 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
 
             const identityNavItems = identities.map((identity) => ({
               name: identity.name,
-              logo: User
+              logo: User,
             }));
 
             const mainNavItems = [
@@ -137,8 +135,8 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
                   {
                     title: "Habits",
                     url: "#",
-                  }
-                ]
+                  },
+                ],
               },
               {
                 title: "Roadmaps",
@@ -146,21 +144,23 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
                 icon: Map,
                 items: goals.map((goal) => ({
                   title: goal.title,
-                  url: `/roadmap/${goal.id}`
-                }))
-            }];
+                  url: `/roadmap/${goal.id}`,
+                })),
+              },
+            ];
 
             const userNavItem = {
               username: profile.username,
               email: user.email || "",
               url: "#",
-              icon: User
+              icon: User,
             };
 
             setNavigationData({
               identityNavItems,
               mainNavItems,
-              userNavItem});
+              userNavItem,
+            });
           }
         } catch (error) {
           console.error("Failed to load user navigation:", error);
@@ -171,14 +171,17 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
         setIsLoading(false);
       }
     }
-    
+
     loadUserNavigation();
   }, [isAuthenticated, user]);
-  
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <IdentitySwitcher identities={navigationData.identityNavItems} isLoading={isLoading} />
+        <IdentitySwitcher
+          identities={navigationData.identityNavItems}
+          isLoading={isLoading}
+        />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={navigationData.mainNavItems} isLoading={isLoading} />
@@ -189,4 +192,4 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
       <SidebarRail />
     </Sidebar>
   );
-}
+};

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 export const useDropdown = (): {
   isOpen: boolean;
@@ -21,13 +21,13 @@ export const useDropdown = (): {
     };
 
     if (isOpen) {
-      document.addEventListener('click', handleClickOutside);
+      document.addEventListener("click", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [isOpen]);
 
   return { isOpen, toggleDropdown, closeDropdown, ref };
-}
+};

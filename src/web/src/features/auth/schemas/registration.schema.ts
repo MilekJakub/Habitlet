@@ -16,7 +16,7 @@ export const otpStepSchema = z.object({
 
 // Schema for the details step
 export const detailsStepSchema = z.object({
-  email: z.string(),
+  email: z.string().email(),
   otp: z.string(),
   username: z
     .string()

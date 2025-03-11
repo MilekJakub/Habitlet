@@ -68,7 +68,7 @@ Remove friction to ensure that users can act without obstacles:
 
 #### **4. Reward – Make it Satisfying:**  
 Reward users to reinforce habit formation:  
-- **User Porgress:** Earn XP and level up identity development  
+- **User Progress:** Earn XP and level up identity development  
 - **Habit Heatmaps:** Visualize consistency and progress  
 - **Streak Tracking:** Maintain daily streaks for each habit  
 - **Roadmap Progress Bars:** Track progress toward the final goal  

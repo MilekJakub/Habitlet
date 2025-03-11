@@ -1,12 +1,12 @@
+import { createGoalInputSchema } from "@/features/dashboard/components/goals/create/create-goal.schema";
+import { GoalEntity } from "@/types/goal";
 import { z } from "zod";
 import { supabase } from "@/lib/supabase";
-import { Goal } from "@/types/goal";
-import { createGoalInputSchema } from "../schemas/create-goal.schema";
 export type CreateGoalInput = z.infer<typeof createGoalInputSchema>;
 
 export const createGoal = async (
   createGoalInput: CreateGoalInput
-): Promise<Goal> => {
+): Promise<GoalEntity> => {
   const goalDataToInsert = {
     title: createGoalInput.title,
     description: createGoalInput.description,
@@ -15,9 +15,8 @@ export const createGoal = async (
     priority: createGoalInput.priority,
     tags: createGoalInput.tags,
     status: createGoalInput.status,
-    progress: createGoalInput.progress,
     is_archived: createGoalInput.is_archived,
-    user_id: createGoalInput.user_id
+    user_id: createGoalInput.user_id,
   };
 
   const { data, error } = await supabase
@@ -34,5 +33,5 @@ export const createGoal = async (
     throw new Error("Failed to create goal: No data returned");
   }
 
-  return data as Goal;
+  return data as GoalEntity;
 };

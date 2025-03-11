@@ -28,7 +28,7 @@ export const ACTIONS = [
 
 type FormData = z.infer<typeof createGoalInputSchema>;
 
-export const INITIAL_CREATE_GOAL_FORM_DATA : FormData = {
+export const INITIAL_CREATE_GOAL_FORM_DATA: FormData = {
   title: "",
   description: "",
   action: "",
@@ -41,7 +41,7 @@ export const INITIAL_CREATE_GOAL_FORM_DATA : FormData = {
   priority: "medium" as GoalPriority,
   tags: [] as string[],
   status: "unlocked" as GoalStatus,
-  is_archived: false
+  is_archived: false,
 };
 
 export const GOAL_CATEGORIES = [

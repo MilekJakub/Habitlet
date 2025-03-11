@@ -51,7 +51,7 @@ const StatusBorder = ({
       <div
         className={clsx(
           "absolute -left-[1px] -top-[1px] h-[calc(100%+2px)] w-[calc(100%+2px)] rounded-[7px] border-2",
-          className,
+          className
         )}
       />
       {children}
@@ -65,15 +65,23 @@ export const NodeStatusIndicator = ({
 }: NodeStatusIndicatorProps) => {
   switch (status) {
     case "locked":
-      return <StatusBorder className="border-zinc-50">{children}</StatusBorder>
+      return <StatusBorder className="border-zinc-50">{children}</StatusBorder>;
     case "unlocked":
-      return <StatusBorder className="border-zinc-600">{children}</StatusBorder>
+      return (
+        <StatusBorder className="border-zinc-600">{children}</StatusBorder>
+      );
     case "in_progress":
-      return <StatusBorder className="border-yellow-400">{children}</StatusBorder>;
+      return (
+        <StatusBorder className="border-yellow-400">{children}</StatusBorder>
+      );
     case "completed":
-      return <StatusBorder className="border-green-400">{children}</StatusBorder>;
+      return (
+        <StatusBorder className="border-green-400">{children}</StatusBorder>
+      );
     case "skipped":
-      return <StatusBorder className="border-gray-400">{children}</StatusBorder>;
+      return (
+        <StatusBorder className="border-gray-400">{children}</StatusBorder>
+      );
     default:
       return <>{children}</>;
   }

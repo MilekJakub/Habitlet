@@ -20,13 +20,17 @@ type StepProps = {
   validationErrors: Record<string, string>;
 };
 
-export const ActionStep = ({ formData, updateFormData, validationErrors }: StepProps) => {
+export const ActionStep = ({
+  formData,
+  updateFormData,
+  validationErrors,
+}: StepProps) => {
   const selectRef = React.useRef<HTMLButtonElement>(null);
-  
+
   React.useEffect(() => {
     selectRef.current?.focus();
   }, []);
-  
+
   return (
     <div className="space-y-4">
       <p className="text-gray-600">
@@ -40,7 +44,7 @@ export const ActionStep = ({ formData, updateFormData, validationErrors }: StepP
           value={formData.action}
           onValueChange={(value: string) => updateFormData("action", value)}
         >
-          <SelectTrigger 
+          <SelectTrigger
             ref={selectRef}
             className={validationErrors?.action ? "border-red-500" : ""}
           >
@@ -57,11 +61,16 @@ export const ActionStep = ({ formData, updateFormData, validationErrors }: StepP
         {validationErrors?.action && (
           <p className="text-sm text-red-500">{validationErrors.action}</p>
         )}
-        <GoalSummary 
-          formData={formData} 
-          onRemoveTag={(tag) => updateFormData("tags", formData.tags?.filter(t => t !== tag) || [])} 
+        <GoalSummary
+          formData={formData}
+          onRemoveTag={(tag) =>
+            updateFormData(
+              "tags",
+              formData.tags?.filter((t) => t !== tag) || []
+            )
+          }
         />
       </div>
     </div>
   );
-}; 
+};

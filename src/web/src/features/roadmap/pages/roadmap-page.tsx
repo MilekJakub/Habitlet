@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router';
-import { ReactFlowProvider } from '@xyflow/react';
-import { MainLayout } from '@/layout/main-layout';
-import { RoadmapCanvas } from '@/features/roadmap/components/roadmap-canvas';
-import { RoadmapData, RoadmapStoreProvider } from '@/store/roadmap.store';
-import { fetchDependencies, fetchGoal, fetchMilestones, fetchSteps } from '@/services/roadmap.service';
-import { Loader2 } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router";
+import { ReactFlowProvider } from "@xyflow/react";
+import { MainLayout } from "@/layout/main-layout";
+import { RoadmapCanvas } from "@/features/roadmap/components/roadmap-canvas";
+import { RoadmapData, RoadmapStoreProvider } from "@/store/roadmap.store";
+import {
+  fetchDependencies,
+  fetchGoal,
+  fetchMilestones,
+  fetchSteps,
+} from "@/services/roadmap.service";
+import { Loader2 } from "lucide-react";
 
 export const RoadmapPage = () => {
   const { goalId } = useParams<{ goalId: string }>();
@@ -15,12 +20,12 @@ export const RoadmapPage = () => {
     goal: null!,
     milestones: [],
     steps: [],
-    dependencies: []
+    dependencies: [],
   });
 
   useEffect(() => {
     if (!goalId) {
-      navigate('/goals');
+      navigate("/goals");
       return;
     }
 
@@ -36,10 +41,10 @@ export const RoadmapPage = () => {
           goal,
           milestones,
           steps,
-          dependencies
+          dependencies,
         });
       } catch (error) {
-        console.error('Failed to load roadmap data:', error);
+        console.error("Failed to load roadmap data:", error);
         // Handle error (maybe show an error message)
       } finally {
         setLoading(false);

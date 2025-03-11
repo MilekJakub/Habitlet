@@ -10,12 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  CalendarIcon,
-  Edit,
-  Trash2,
-  Archive,
-} from "lucide-react";
+import { CalendarIcon, Edit, Trash2, Archive } from "lucide-react";
 import type { GoalEntity } from "@/types/goal";
 
 interface GoalCardProps {
@@ -38,7 +33,7 @@ export const GoalCard = ({
   const priorityColors = {
     low: "bg-green-100 text-green-800",
     medium: "bg-yellow-100 text-yellow-800",
-    high: "bg-red-100 text-red-800"
+    high: "bg-red-100 text-red-800",
   };
 
   return (
@@ -55,7 +50,9 @@ export const GoalCard = ({
             <Badge variant="outline" className={priorityColors[goal.priority]}>
               {goal.priority.charAt(0).toUpperCase() + goal.priority.slice(1)}
             </Badge>
-            <Badge variant="secondary">{goal.category.charAt(0).toUpperCase() + goal.category.slice(1)}</Badge>
+            <Badge variant="secondary">
+              {goal.category.charAt(0).toUpperCase() + goal.category.slice(1)}
+            </Badge>
           </div>
         </div>
       </CardHeader>
@@ -74,7 +71,9 @@ export const GoalCard = ({
 
         <div className="mb-2">
           <div className="flex justify-between mb-1">
-            <span className="text-sm font-medium">Progress (this needs to be dynamic)</span>
+            <span className="text-sm font-medium">
+              Progress (this needs to be dynamic)
+            </span>
             <span className="text-sm font-medium">{50}%</span>
           </div>
           <Progress value={50} className="h-2" />
@@ -111,4 +110,4 @@ export const GoalCard = ({
       </CardFooter>
     </Card>
   );
-}
+};

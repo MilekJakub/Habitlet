@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
-import { Play } from 'lucide-react';
-
+import React, { useCallback } from "react";
+import { Play } from "lucide-react";
+import { Node } from "@xyflow/react";
 import {
   NodeHeaderTitle,
   NodeHeader,
@@ -8,29 +8,32 @@ import {
   NodeHeaderAction,
   NodeHeaderDeleteAction,
   NodeHeaderIcon,
-} from '@/features/roadmap/components/node-header';
-import { RoadmapNodeData } from '@/types/roadmap';
-import { iconMapping } from '@/data/icon-mapping';
-import { BaseNode } from '@/features/roadmap/components/base-node';
-import { NodeStatusIndicator } from '@/features/roadmap/components/node-status-indicator';
-import { NODE_SIZE } from '@/constants/roadmap-constants';
+} from "@/features/roadmap/components/node-header";
+import { RoadmapNodeData } from "@/types/roadmap";
+import { iconMapping } from "@/data/icon-mapping";
+import { BaseNode } from "@/features/roadmap/components/base-node";
+import { NodeStatusIndicator } from "@/features/roadmap/components/node-status-indicator";
+import { NODE_SIZE } from "@/constants/roadmap-constants";
+import { NodeProps } from "@xyflow/react";
 
-function RoadmapNode({
-  id,
-  data,
-  children,
-}: {
+export type RoadmapNodeComponentProps = NodeProps<Node<RoadmapNodeData>> & {
   id: string;
   data: RoadmapNodeData;
   children?: React.ReactNode;
-}) {
-  const onClick = useCallback(() => console.log('clicked'), []);
+};
+
+export const RoadmapNodeComponent = ({
+  id,
+  data,
+  children,
+}: RoadmapNodeComponentProps) => {
+  const onClick = useCallback(() => console.log("clicked"), []);
 
   const IconComponent = data?.icon ? iconMapping[data.icon] : undefined;
 
   return (
     <NodeStatusIndicator status={data?.status}>
-      <BaseNode className="p-1" style={{ ...NODE_SIZE }}>
+      <BaseNode id={id} className="p-1" style={{ ...NODE_SIZE }}>
         <NodeHeader>
           <NodeHeaderIcon>
             {IconComponent ? <IconComponent aria-label={data?.icon} /> : null}
@@ -47,6 +50,4 @@ function RoadmapNode({
       </BaseNode>
     </NodeStatusIndicator>
   );
-}
-
-export default RoadmapNode;
+};

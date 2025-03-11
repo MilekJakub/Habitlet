@@ -21,11 +21,11 @@ import {
   emailStepSchema,
   otpStepSchema,
   detailsStepSchema,
-  registrationSchema,
   type RegistrationInput,
 } from "../schemas/registration.schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 type Step = "email" | "otp" | "details";
 
@@ -51,18 +51,15 @@ export const RegistrationFlow = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 
-  // Get the current step's schema
   const getStepSchema = () => {
-    switch (step) {
-      case "email":
-        return emailStepSchema;
-      case "otp":
-        return otpStepSchema;
-      case "details":
-        return detailsStepSchema;
-      default:
-        return emailStepSchema;
-    }
+    return z.object({
+      email: step === "email" ? emailStepSchema.shape.email : z.string(),
+      otp: step === "otp" ? otpStepSchema.shape.otp : z.string(),
+      username:
+        step === "details" ? detailsStepSchema.shape.username : z.string(),
+      password:
+        step === "details" ? detailsStepSchema.shape.password : z.string(),
+    });
   };
 
   const form = useForm<RegistrationInput>({
@@ -71,7 +68,6 @@ export const RegistrationFlow = () => {
     mode: "onChange",
   });
 
-  // Update the form's validation schema when the step changes
   useEffect(() => {
     const currentValues = form.getValues();
     form.reset(currentValues, {
@@ -88,27 +84,15 @@ export const RegistrationFlow = () => {
   }, [step, form]);
 
   useEffect(() => {
-    console.log("Form state:", {
-      values: form.getValues(),
-      errors: form.formState.errors,
-      isValid: form.formState.isValid,
-      isDirty: form.formState.isDirty,
-    });
-  }, [form.formState]);
-
-  useEffect(() => {
     return () => {
       setIsRegistering(false);
     };
   }, [setIsRegistering]);
 
   const handleEmailStep = async (data: RegistrationInput) => {
-    console.log("handleEmailStep called with data:", data);
     try {
       setIsLoading(true);
-      console.log("Calling signUpWithEmail with:", data.email);
       const result = await signUpWithEmail(data.email);
-      console.log("signUpWithEmail result:", result);
       if (result.success) {
         toast({
           title: "Verification email sent! Please check your inbox.",
@@ -383,5 +367,3 @@ export const RegistrationFlow = () => {
     </AuthLayout>
   );
 };
-
-export default RegistrationFlow;

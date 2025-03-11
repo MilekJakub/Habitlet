@@ -1,32 +1,38 @@
-'use client';
+"use client";
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode } from "react";
 
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from '@/components/ui/context-menu';
-import { RoadmapNodeType } from '@/types/roadmap';
-import { iconMapping } from '@/data/icon-mapping';
-import { useClientPosition } from '@/hooks/use-client-position';
-import { useRoadmapStore } from '@/store/roadmap.store';
-import { nodesConfig } from '@/data/roadmap-data';
+} from "@/components/ui/context-menu";
+import { RoadmapNodeType } from "@/types/roadmap";
+import { iconMapping } from "@/data/icon-mapping";
+import { useClientPosition } from "@/hooks/use-client-position";
+import { nodesConfig } from "@/data/roadmap-data";
 
-export default function RoadmapContextMenu({ children }: { children: ReactNode }) {
+export default function RoadmapContextMenu({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const [position, setPosition] = useClientPosition();
-  const addNodeByType = useRoadmapStore((s) => s.addNodeByType);
+  // const addNode= useRoadmapStore((s) => s.addNode);
 
-  const onItemClick = (nodeType: RoadmapNodeType) => {
+  const onItemClick = () => {
     if (!position) {
       return;
     }
 
-    addNodeByType(nodeType, position);
+    console.log("RoadmapContextMenu:onItemClick");
+
+    // TODO: Show a popup form for appropriate node type
+    // addNode(node);
   };
 
-  const nodeTypeOrder = ['step-node', 'milestone-node'];
+  const nodeTypeOrder = ["step-node", "milestone-node"];
 
   return (
     <div className="h-full w-full bg-gray-100" onContextMenu={setPosition}>
@@ -39,7 +45,7 @@ export default function RoadmapContextMenu({ children }: { children: ReactNode }
               ? iconMapping[item.icon]
               : undefined;
             return (
-              <a key={item.title} onClick={() => onItemClick(item.id)}>
+              <a key={item.title} onClick={() => onItemClick()}>
                 <ContextMenuItem className="flex items-center space-x-2">
                   {IconComponent ? (
                     <IconComponent aria-label={item?.icon} />

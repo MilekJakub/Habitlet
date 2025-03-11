@@ -81,10 +81,16 @@ export const DashboardPage = () => {
     <MainLayout>
       <div className="space-y-6">
         <div className="flex justify-between items-center">
-          <Header type="h3" className="border-none">My Goals</Header>
+          <Header type="h3" className="border-none">
+            My Goals
+          </Header>
           <Button onClick={() => setIsFormOpen(true)}>Create a goal</Button>
         </div>
-        <CreateGoal isOpen={isFormOpen} setIsOpen={setIsFormOpen} onSuccess={() => window.location.reload()} />
+        <CreateGoal
+          isOpen={isFormOpen}
+          setIsOpen={setIsFormOpen}
+          onSuccess={() => window.location.reload()}
+        />
         {isLoading ? (
           <div className="flex justify-center items-center h-full">
             <Loader2 className="animate-spin" size={24} />
@@ -94,9 +100,15 @@ export const DashboardPage = () => {
             <div className="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mb-4">
               <Inbox className="h-8 w-8 text-yellow-500" />
             </div>
-            <Header type="h3" className="border-none">Welcome to Habitlet!</Header>
-            <Body type="b1" className="mt-2 mb-6 max-w-md text-zinc-600 dark:text-zinc-400">
-              You don't have any goals yet. Create your first goal to start tracking your progress and building better habits.
+            <Header type="h3" className="border-none">
+              Welcome to Habitlet!
+            </Header>
+            <Body
+              type="b1"
+              className="mt-2 mb-6 max-w-md text-zinc-600 dark:text-zinc-400"
+            >
+              You don't have any goals yet. Create your first goal to start
+              tracking your progress and building better habits.
             </Body>
           </div>
         ) : (

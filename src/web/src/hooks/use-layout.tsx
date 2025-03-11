@@ -1,10 +1,10 @@
-import { useCallback } from 'react';
-import { useReactFlow } from '@xyflow/react';
-import { useShallow } from 'zustand/react/shallow';
+import { useRoadmapStore } from "@/store/useRoadmapStore";
+import { useCallback } from "react";
+import { useReactFlow } from "@xyflow/react";
+import { useShallow } from "zustand/react/shallow";
 
-import { layoutGraph } from '@/store/layout';
-import { useRoadmapStore } from '@/store/roadmap.store';
-import { RoadmapStore } from '@/store/roadmap.store';
+import { layoutGraph } from "@/store/layout";
+import { RoadmapStore } from "@/store/roadmap.store";
 
 const selector = (state: RoadmapStore) => ({
   getNodes: state.getNodes,
@@ -13,7 +13,9 @@ const selector = (state: RoadmapStore) => ({
   setEdges: state.setEdges,
 });
 
-export const useLayout = (shouldFitView: boolean = false): (() => Promise<void>) => {
+export const useLayout = (
+  shouldFitView: boolean = false
+): (() => Promise<void>) => {
   const { fitView } = useReactFlow();
   const { getNodes, getEdges, setNodes, setEdges } = useRoadmapStore(
     useShallow(selector)
@@ -37,4 +39,4 @@ export const useLayout = (shouldFitView: boolean = false): (() => Promise<void>)
       setTimeout(() => fitView({ padding: 0.4 }), 2);
     }
   }, [fitView, getEdges, getNodes, setEdges, setNodes, shouldFitView]);
-}
+};

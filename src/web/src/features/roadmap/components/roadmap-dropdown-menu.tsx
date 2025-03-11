@@ -1,20 +1,20 @@
-import React from 'react';
+import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { RoadmapNodeType, NodeConfig } from '@/types/roadmap';
-import { iconMapping } from '@/data/icon-mapping';
-import { nodesConfig } from '@/data/roadmap-data';
+} from "@/components/ui/dropdown-menu";
+import { NodeConfig, RoadmapNode } from "@/types/roadmap";
+import { iconMapping } from "@/data/icon-mapping";
+import { nodesConfig } from "@/data/roadmap-data";
 
 export const RoadmapDropdownMenu = ({
   onAddNode,
   filterNodes = () => true,
 }: {
-  onAddNode: (type: RoadmapNodeType) => void;
+  onAddNode: (node: RoadmapNode) => void;
   filterNodes?: (node: NodeConfig) => boolean;
 }) => {
   return (
@@ -29,17 +29,21 @@ export const RoadmapDropdownMenu = ({
               ? iconMapping[item.icon]
               : undefined;
             return (
-              <a key={item.title} onClick={() => onAddNode(item.id)}>
-                <DropdownMenuItem className="flex items-center space-x-2">
-                  {IconComponent ? (
-                    <IconComponent aria-label={item?.icon} />
-                  ) : null}
-                  <span>New {item.title}</span>
-                </DropdownMenuItem>
-              </a>
+              // TODO: On click, show popup for appropriate node type
+              <DropdownMenuItem
+                className="flex items-center space-x-2"
+                onClick={() => {
+                  onAddNode(null!);
+                }}
+              >
+                {IconComponent ? (
+                  <IconComponent aria-label={item?.icon} />
+                ) : null}
+                <span>New {item.title}</span>
+              </DropdownMenuItem>
             );
           })}
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};

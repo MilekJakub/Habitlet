@@ -1,8 +1,7 @@
-import React from 'react';
-import { BaseEdge, Edge, EdgeProps, getSmoothStepPath } from '@xyflow/react';
-import { EdgeButton } from './edge-button';
-
-export type RoadmapEdge = Edge<{}, 'roadmap'>;
+import React from "react";
+import { BaseEdge, EdgeProps, getSmoothStepPath } from "@xyflow/react";
+import { EdgeButton } from "./edge-button";
+import { RoadmapEdge } from "@/types/roadmap";
 
 export const createEdge = (
   source: string,
@@ -15,11 +14,11 @@ export const createEdge = (
   target,
   sourceHandle: sourceHandleId,
   targetHandle: targetHandleId,
-  type: 'roadmap',
+  type: "roadmap",
   animated: true,
 });
 
-export const RoadmapEdge = ({
+export const RoadmapEdgeComponent = ({
   id,
   sourceX,
   sourceY,
@@ -48,7 +47,7 @@ export const RoadmapEdge = ({
         id={id}
         path={edgePath}
         markerEnd={markerEnd}
-        style={{ ...style, pointerEvents: 'auto' }}
+        style={{ ...style, pointerEvents: "auto" }}
       />
       <EdgeButton
         id={id}
@@ -61,4 +60,4 @@ export const RoadmapEdge = ({
       />
     </>
   );
-}
+};
