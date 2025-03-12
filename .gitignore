@@ -176,4 +176,5 @@ src/*
 .env.*
 !.env.example
 
+# TypeScript build info
 tsconfig.tsbuildinfo
