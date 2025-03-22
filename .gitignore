@@ -2,6 +2,10 @@
 
 temp/
 
+# Build output
+dist/
+build/
+
 # Build Folders
 [Bb]in/
 [Oo]bj/
@@ -162,3 +166,15 @@ package-lock.json
 
 # CircleCI
 .circleci/generated_config.yml
+
+# Ignore all src/ contents except web/
+src/*
+!src/web/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# TypeScript build info
+tsconfig.tsbuildinfo
