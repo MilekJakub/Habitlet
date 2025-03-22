@@ -7,7 +7,7 @@ import { z } from "zod";
 import { createGoal } from "../../../api/create-goal";
 import { createGoalInputSchema } from "./create-goal.schema";
 import { format } from "date-fns";
-import { useAuth } from "@/store/auth.store";
+import { useAuth } from "@/features/auth/stores/auth.store";
 import { INITIAL_CREATE_GOAL_FORM_DATA } from "@/constants/goals-constants";
 import { TitleStep } from "./steps/title-step";
 import { ActionStep } from "./steps/action-step";

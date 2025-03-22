@@ -1,4 +1,3 @@
-
 # **Subdomain Breakdown**
 
 ## **1. Introduction**

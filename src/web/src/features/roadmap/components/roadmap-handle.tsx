@@ -1,6 +1,4 @@
-"use client";
-
-import { useRoadmapStore } from "@/store/useRoadmapStore";
+import { useRoadmapStore } from "@/features/roadmap/stores/useRoadmapStore";
 import React, { useCallback, useEffect } from "react";
 import clsx from "clsx";
 import { useShallow } from "zustand/react/shallow";
@@ -12,8 +10,8 @@ import {
   useNodeId,
   XYPosition,
 } from "@xyflow/react";
-import { type RoadmapStore } from "@/store/roadmap.store";
-import { NodeConfig, RoadmapNode } from "@/types/roadmap";
+import { type RoadmapStore } from "@/features/roadmap/stores/roadmap.store";
+import { NodeConfig, RoadmapNode } from "@/features/roadmap/types/roadmap";
 import { Button } from "@/components/ui/button";
 import { ButtonHandle } from "@/features/roadmap/components/button-handle";
 import { RoadmapDropdownMenu } from "@/features/roadmap/components/roadmap-dropdown-menu";

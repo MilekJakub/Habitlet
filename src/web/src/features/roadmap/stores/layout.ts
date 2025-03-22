@@ -1,6 +1,6 @@
 import { type Edge } from "@xyflow/react";
 import ELK, { ElkNode, ElkPort } from "elkjs/lib/elk.bundled.js";
-import { type RoadmapNode } from "@/types/roadmap";
+import { type RoadmapNode } from "@/features/roadmap/types/roadmap";
 import { nodesConfig } from "@/data/roadmap-data";
 
 const elk = new ELK();

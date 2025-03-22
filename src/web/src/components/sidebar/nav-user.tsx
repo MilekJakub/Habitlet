@@ -1,7 +1,6 @@
-"use client";
 import React from "react";
 import { useNavigate } from "react-router";
-import { useAuth } from "@/store/auth.store";
+import { useAuth } from "@/features/auth/stores/auth.store";
 import { useToast } from "@/hooks/use-toast";
 
 import { ChevronsUpDown, LogOut, Loader2 } from "lucide-react";

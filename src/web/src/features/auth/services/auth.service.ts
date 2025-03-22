@@ -3,10 +3,10 @@ import { AuthError, PostgrestError, User } from "@supabase/supabase-js";
 
 export type AuthServiceError = AuthError | PostgrestError | Error;
 
-export interface AuthResponse<T = undefined> {
+export interface AuthResponse {
   success: boolean;
   error?: AuthServiceError;
-  data?: T;
+  user?: User;
 }
 
 interface SignUpParams {
@@ -24,26 +24,21 @@ interface VerifyOtpParams {
 }
 
 interface UpdateUserDetailsParams {
+  userId: string;
   username: string;
   password: string;
-  userId: string;
-}
-
-interface SignInWithGoogleParams {
-  redirectTo?: string;
 }
 
 export class AuthService {
   static async signUpWithEmail({ email }: SignUpParams): Promise<AuthResponse> {
     try {
-      console.log("Attempting to sign up with email:", email);
       if (!email) {
-        throw new Error("Email is required");
+        return { success: false, error: new Error("Email is required.") };
       }
+
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: window.location.origin + "/auth/confirm",
           shouldCreateUser: true,
           data: {
             flow: "otp",
@@ -52,138 +47,124 @@ export class AuthService {
       });
 
       if (error) {
-        throw error;
+        return { success: false, error };
       }
 
       return { success: true };
     } catch (error) {
-      console.error("Error signing up:", error);
-      return { success: false, error: error as AuthServiceError };
+      console.error("Error signing up: ", error);
+
+      if (error instanceof Error) {
+        return { success: false, error };
+      }
+
+      return { success: false, error: new Error("An unexpected error occurred while singing up.") };
     }
   }
 
-  static async signInWithEmail({
-    email,
-    password,
-  }: SignInParams): Promise<AuthResponse<{ user: User }>> {
+  static async signInWithEmail({ email, password }: SignInParams): Promise<AuthResponse> {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (error) {
-        throw error;
+        console.error("Error signing in: ", error);
+        return { success: false, error: error as AuthServiceError };
       }
 
       if (!data.user) {
-        throw new Error("User not found in response");
+        console.error("User not found in response.");
+        return { success: false, error: Error("User not found in response.") };
       }
 
-      return { success: true, data: { user: data.user } };
+      return { success: true, user: data.user };
     } catch (error) {
-      console.error("Error signing in:", error);
-      return { success: false, error: error as AuthServiceError };
+      console.error("Error signing in: ", error);
+
+      if (error instanceof Error) {
+        return { success: false, error: error };
+      }
+
+      return { success: false, error: new Error("An unexpected error occurred while signing in.") };
     }
   }
 
-  static async verifyOtp({
-    email,
-    token,
-  }: VerifyOtpParams): Promise<AuthResponse<{ user: User }>> {
+  static async verifyOtp({ email, token }: VerifyOtpParams): Promise<AuthResponse> {
     try {
-      const { data, error } = await supabase.auth.verifyOtp({
-        email,
-        token,
-        type: "email",
-      });
+      const { data, error } = await supabase.auth.verifyOtp({ email, token, type: "email" });
 
       if (error) {
-        throw error;
+        console.error("Error verifying OTP: ", error);
+        return { success: false, error };
       }
 
       if (!data.user) {
-        throw new Error("User not found in response");
+        console.error("User not found in response.");
+        return { success: false, error: new Error("User not found in response.") };
       }
 
-      return { success: true, data: { user: data.user } };
+      return { success: true, user: data.user };
     } catch (error) {
-      console.error("Error verifying OTP:", error);
-      return { success: false, error: error as AuthServiceError };
+      console.error("Error verifying OTP: ", error);
+
+      if (error instanceof Error) {
+        return { success: false, error };
+      }
+
+      return { success: false, error: new Error("An unexpected error occurred while verifying OTP.") };
     }
   }
 
-  static async updateUserDetails({
+  static async upsertUserDetails({
+    userId,
     username,
     password,
-    userId,
   }: UpdateUserDetailsParams): Promise<AuthResponse> {
     try {
-      console.log("Starting user details update for userId:", userId);
+      const { error: updatePasswordError } = await supabase.auth.updateUser({ password });
 
-      const { error: passwordError } = await supabase.auth.updateUser({
-        password,
-      });
-
-      if (passwordError) {
-        console.error("Password update error:", passwordError);
-        throw passwordError;
+      if (updatePasswordError) {
+        console.error("Password update error:", updatePasswordError);
+        return { success: false, error: updatePasswordError };
       }
 
-      const { error: fetchError } = await supabase
+      const { error: fetchProfilesError } = await supabase
         .from("profiles")
         .select("*")
         .eq("id", userId)
         .single();
 
-      if (fetchError) {
-        console.error("Error fetching profile:", fetchError);
-        const { error: insertError } = await supabase
-          .from("profiles")
-          .insert([{ id: userId, username }]);
+      if (fetchProfilesError) {
+        const { error: insertUserProfileError } = await supabase
+        .from("profiles")
+        .insert([{ id: userId, username }]);
 
-        if (insertError) {
-          console.error("Error creating profile:", insertError);
-          throw insertError;
+        if (insertUserProfileError) {
+          console.error("Error creating profile:", insertUserProfileError);
+          return { success: false, error: insertUserProfileError };
         }
-      } else {
-        const { error: profileError } = await supabase
-          .from("profiles")
-          .update({ username })
-          .eq("id", userId);
 
-        if (profileError) {
-          console.error("Profile update error:", profileError);
-          throw profileError;
-        }
+        return { success: true };
+      }
+
+      const { error: updateUserProfileError } = await supabase
+        .from("profiles")
+        .update({ username })
+        .eq("id", userId);
+
+      if (updateUserProfileError) {
+        console.error("Profile update error:", updateUserProfileError);
+        return { success: false, error: updateUserProfileError };
       }
 
       return { success: true };
     } catch (error) {
       console.error("Error updating user details:", error);
-      return { success: false, error: error as AuthServiceError };
-    }
-  }
 
-  static async signInWithGoogle({
-    redirectTo = window.location.origin + "/dashboard",
-  }: SignInWithGoogleParams = {}): Promise<AuthResponse> {
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo,
-        },
-      });
-
-      if (error) {
-        throw error;
+      if (error instanceof Error) {
+        return { success: false, error };
       }
 
-      return { success: true };
-    } catch (error) {
-      console.error("Error signing in with Google:", error);
-      return { success: false, error: error as AuthServiceError };
+      return { success: false, error: new Error("An unexpected error occurred while updating user details.") };
     }
   }
 
@@ -194,13 +175,18 @@ export class AuthService {
       });
 
       if (error) {
-        throw error;
+        return { success: false, error };
       }
 
       return { success: true };
     } catch (error) {
       console.error("Error resetting password:", error);
-      return { success: false, error: error as AuthServiceError };
+
+      if (error instanceof Error) {
+        return { success: false, error };
+      }
+
+      return { success: false, error: new Error("An unexpected error occurred while resetting password.") };
     }
   }
 
@@ -209,7 +195,7 @@ export class AuthService {
       const { data, error } = await supabase.auth.getSession();
 
       if (error) {
-        throw error;
+        return { session: null, user: null };
       }
 
       return { session: data.session, user: data.session?.user };
@@ -224,7 +210,7 @@ export class AuthService {
       const { error } = await supabase.auth.signOut();
 
       if (error) {
-        throw error;
+        return { success: false, error };
       }
 
       return { success: true };

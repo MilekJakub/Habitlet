@@ -1,41 +1,46 @@
 import React, { useEffect } from "react";
+import { AuthResponse, AuthService } from "@/features/auth/services/auth.service";
+import { supabase } from "@/lib/supabase";
 import { User } from "@supabase/supabase-js";
 import { create } from "zustand";
-import {
-  AuthService,
-  AuthResponse,
-} from "@/features/auth/services/auth.service";
-import { supabase } from "@/lib/supabase";
 
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   isRegistering: boolean;
-  tempEmail: string | null;
+  registrationEmail: string | null;
 
   setUser: (user: User | null) => void;
+
+  setRegistrationEmail: (email: string) => void;
+
   setIsLoading: (isLoading: boolean) => void;
-  setTempEmail: (email: string | null) => void;
+
   setIsRegistering: (isRegistering: boolean) => void;
 
   signUpWithEmail: (email: string) => Promise<AuthResponse>;
+
   signInWithEmail: (
     email: string,
     password: string
-  ) => Promise<AuthResponse<{ user: User }>>;
+  ) => Promise<AuthResponse>;
+
   verifyOtp: (
     email: string,
     token: string
-  ) => Promise<AuthResponse<{ user: User }>>;
-  updateUserDetails: (
-    username: string,
-    password: string,
-    userId: string
   ) => Promise<AuthResponse>;
-  signInWithGoogle: () => Promise<AuthResponse>;
+
+  upsertUserDetails: (
+    userId: string,
+    username: string,
+    password: string
+  ) => Promise<AuthResponse>;
+
   resetPassword: (email: string) => Promise<AuthResponse>;
+
   signOut: () => Promise<AuthResponse>;
+
   checkSession: () => Promise<void>;
 }
 
@@ -44,25 +49,21 @@ export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: false,
   isLoading: true,
   isRegistering: false,
-  tempEmail: null,
+  registrationEmail: null,
 
-  setUser: (user) =>
-    set({
-      user,
-      isAuthenticated: !!user,
-    }),
+  setUser: (user) => set({ user, isAuthenticated: !!user, }),
+
+  setRegistrationEmail: (email: string) => set({ registrationEmail: email }),
+
   setIsLoading: (isLoading) => set({ isLoading }),
-  setTempEmail: (tempEmail) => set({ tempEmail }),
+
   setIsRegistering: (isRegistering) => set({ isRegistering }),
 
   checkSession: async () => {
     set({ isLoading: true });
     try {
       const { user } = await AuthService.getSession();
-      set({
-        user: user || null,
-        isAuthenticated: !!user,
-      });
+      set({ user: user || null, isAuthenticated: !!user });
     } catch (error) {
       console.error("Error checking session:", error);
       set({ user: null, isAuthenticated: false });
@@ -72,15 +73,15 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   signUpWithEmail: async (email) => {
-    set({ tempEmail: email, isRegistering: true });
-    return await AuthService.signUpWithEmail({ email });
+    set({ registrationEmail: email, isRegistering: true });
+    return await AuthService.signUpWithEmail({ email })
   },
 
   signInWithEmail: async (email, password) => {
     const result = await AuthService.signInWithEmail({ email, password });
-    if (result.success && result.data?.user) {
+    if (result.success && result.user) {
       set({
-        user: result.data.user,
+        user: result.user,
         isAuthenticated: true,
         isRegistering: false,
       });
@@ -90,20 +91,17 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   verifyOtp: async (email, token) => {
     const result = await AuthService.verifyOtp({ email, token });
-    if (result.success && result.data?.user) {
-      set({
-        user: result.data.user,
-        isAuthenticated: true,
-      });
+    if (result.success && result.user) {
+      set({ user: result.user, isAuthenticated: true, isRegistering: false, registrationEmail: null });
     }
     return result;
   },
 
-  updateUserDetails: async (username, password, userId) => {
-    const result = await AuthService.updateUserDetails({
+  upsertUserDetails: async (userId, username, password ) => {
+    const result = await AuthService.upsertUserDetails({
+      userId,
       username,
       password,
-      userId,
     });
     if (result.success) {
       set({ isRegistering: false });
@@ -111,18 +109,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     return result;
   },
 
-  signInWithGoogle: async () => {
-    const result = await AuthService.signInWithGoogle();
-    if (result.success) {
-      set({ isRegistering: false });
-    }
-    return result;
-  },
-
-  resetPassword: async (email) => {
-    set({ tempEmail: email });
-    return await AuthService.resetPassword(email);
-  },
+  resetPassword: async (email) => await AuthService.resetPassword(email),
 
   signOut: async () => {
     const result = await AuthService.signOut();
@@ -130,7 +117,6 @@ export const useAuthStore = create<AuthState>((set) => ({
       set({
         user: null,
         isAuthenticated: false,
-        tempEmail: null,
         isRegistering: false,
       });
     }
@@ -149,7 +135,7 @@ export const initializeAuthListener = () => {
     });
   });
 
-  useAuthStore.getState().checkSession();
+  useAuthStore.getState().checkSession().then();
 
   return () => {
     subscription.unsubscribe();
@@ -160,14 +146,12 @@ export const AuthInitializer: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   useEffect(() => {
-    const cleanup = initializeAuthListener();
-    return cleanup;
+    return initializeAuthListener();
   }, []);
 
   return <>{children}</>;
 };
 
 export const useAuth = () => {
-  const state = useAuthStore();
-  return state;
+  return useAuthStore();
 };

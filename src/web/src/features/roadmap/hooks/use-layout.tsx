@@ -1,10 +1,9 @@
-import { useRoadmapStore } from "@/store/useRoadmapStore";
+import { useRoadmapStore } from "@/features/roadmap/stores/useRoadmapStore";
 import { useCallback } from "react";
 import { useReactFlow } from "@xyflow/react";
 import { useShallow } from "zustand/react/shallow";
-
-import { layoutGraph } from "@/store/layout";
-import { RoadmapStore } from "@/store/roadmap.store";
+import { layoutGraph } from "@/features/roadmap/stores/layout";
+import { RoadmapStore } from "@/features/roadmap/stores/roadmap.store";
 
 const selector = (state: RoadmapStore) => ({
   getNodes: state.getNodes,

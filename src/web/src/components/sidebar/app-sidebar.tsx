@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import { BookOpen, User, Map, Home } from "lucide-react";
 
@@ -13,7 +11,7 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { useAuth } from "@/store/auth.store";
+import { useAuth } from "@/features/auth/stores/auth.store";
 import { NavigationService } from "@/services/navigation.service";
 
 export type IdentityNavItem = {

@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseEdge, EdgeProps, getSmoothStepPath } from "@xyflow/react";
 import { EdgeButton } from "./edge-button";
-import { RoadmapEdge } from "@/types/roadmap";
+import { RoadmapEdge } from "@/features/roadmap/types/roadmap";
 
 export const createEdge = (
   source: string,

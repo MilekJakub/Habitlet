@@ -1,13 +1,15 @@
 import React from "react";
-import "./App.css";
-
+import { RegistrationOtpPage } from "@/features/auth/pages/registration-otp-page";
+import { RegistrationUserDetailsPage } from "@/features/auth/pages/registration-user-details-page";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { LandingPage } from "@/features/landing/pages/landing-page";
-import { RegistrationFlow } from "@/features/auth/pages/registration-flow";
+import { RegistrationEmailPage } from "@/features/auth/pages/registration-email-page";
 import { DashboardPage } from "@/features/dashboard/pages/dashboard-goals-page";
 import { LoginPage } from "./features/auth/pages/login-page";
 import { ProtectedRoute } from "@/features/auth/components/protected-route";
 import { RoadmapPage } from "@/features/roadmap/pages/roadmap-page";
+
+import "./App.css";
 
 const App = () => {
   return (
@@ -16,7 +18,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            <ProtectedRoute requireAuth={false} redirectTo="/dashboard">
+            <ProtectedRoute requireAuth={false}>
               <LandingPage />
             </ProtectedRoute>
           }
@@ -24,16 +26,35 @@ const App = () => {
         <Route
           path="/login"
           element={
-            <ProtectedRoute requireAuth={false} redirectTo="/dashboard">
+            <ProtectedRoute requireAuth={false}>
               <LoginPage />
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/register"
           element={
-            <ProtectedRoute requireAuth={false} redirectTo="/dashboard">
-              <RegistrationFlow />
+            <ProtectedRoute requireAuth={false}>
+              <RegistrationEmailPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/register/otp"
+          element={
+            <ProtectedRoute requireAuth={false}>
+              <RegistrationOtpPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/register/user-details"
+          element={
+            <ProtectedRoute requireAuth={false}>
+              <RegistrationUserDetailsPage />
             </ProtectedRoute>
           }
         />
@@ -41,7 +62,7 @@ const App = () => {
         <Route
           path="/goals"
           element={
-            <ProtectedRoute requireAuth={true} redirectTo="/">
+            <ProtectedRoute requireAuth={true}>
               <DashboardPage />
             </ProtectedRoute>
           }
@@ -50,7 +71,7 @@ const App = () => {
         <Route
           path="/roadmap/:goalId"
           element={
-            <ProtectedRoute requireAuth={true} redirectTo="/">
+            <ProtectedRoute requireAuth={true}>
               <RoadmapPage />
             </ProtectedRoute>
           }

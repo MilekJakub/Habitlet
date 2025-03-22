@@ -1,12 +1,10 @@
-"use client";
-
-import { useRoadmapStore } from "@/store/useRoadmapStore";
+import { useRoadmapStore } from "@/features/roadmap/stores/useRoadmapStore";
 import React, { useEffect } from "react";
 import { Background, ReactFlow, ConnectionLineType } from "@xyflow/react";
 import { useShallow } from "zustand/react/shallow";
-import { nodeTypes } from "@/types/roadmap";
+import { nodeTypes } from "@/features/roadmap/types/roadmap";
 import { RoadmapEdgeComponent } from "@/features/roadmap/components/edges/roadmap-edge";
-import { useLayout } from "@/hooks/use-layout";
+import { useLayout } from "@/features/roadmap/hooks/use-layout";
 import { RoadmapControls } from "@/features/roadmap/components/roadmap-controls";
 
 import "@xyflow/react/dist/style.css";

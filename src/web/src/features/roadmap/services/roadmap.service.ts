@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabase";
 import { DependencyEntity } from "@/types/dependency";
 import { GoalEntity } from "@/types/goal";
 import { MilestoneEntity } from "@/types/milestone";
-import { RoadmapEdge, RoadmapNodeData } from "@/types/roadmap";
+import { RoadmapEdge, RoadmapNodeData } from "@/features/roadmap/types/roadmap";
 import { StepEntity } from "@/types/step";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 

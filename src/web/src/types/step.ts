@@ -8,6 +8,7 @@ export type StepStatus =
   | "skipped";
 
 export type StepDifficulty = "easy" | "medium" | "hard";
+
 export type StepEstimation = "xs" | "s" | "m" | "l" | "xl" | "xxl";
 
 export interface StepEntity extends Entity {

@@ -9,7 +9,7 @@ import {
   NodeHeaderDeleteAction,
   NodeHeaderIcon,
 } from "@/features/roadmap/components/node-header";
-import { RoadmapNodeData } from "@/types/roadmap";
+import { RoadmapNodeData } from "@/features/roadmap/types/roadmap";
 import { iconMapping } from "@/data/icon-mapping";
 import { BaseNode } from "@/features/roadmap/components/base-node";
 import { NodeStatusIndicator } from "@/features/roadmap/components/node-status-indicator";

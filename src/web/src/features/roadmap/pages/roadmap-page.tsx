@@ -1,15 +1,18 @@
+import { RoadmapStoreProvider } from "@/features/roadmap/stores/roadmap-store-provider";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { ReactFlowProvider } from "@xyflow/react";
 import { MainLayout } from "@/layout/main-layout";
 import { RoadmapCanvas } from "@/features/roadmap/components/roadmap-canvas";
-import { RoadmapData, RoadmapStoreProvider } from "@/store/roadmap.store";
+import {
+  RoadmapData
+} from "@/features/roadmap/stores/roadmap.store";
 import {
   fetchDependencies,
   fetchGoal,
   fetchMilestones,
   fetchSteps,
-} from "@/services/roadmap.service";
+} from "@/features/roadmap/services/roadmap.service";
 import { Loader2 } from "lucide-react";
 
 export const RoadmapPage = () => {
@@ -32,7 +35,6 @@ export const RoadmapPage = () => {
     const loadRoadmapData = async () => {
       try {
         setLoading(true);
-        // Fetch the goal, milestones, and steps data
         const goal = await fetchGoal(goalId);
         const milestones = await fetchMilestones(goalId);
         const steps = await fetchSteps(goalId);
@@ -45,7 +47,6 @@ export const RoadmapPage = () => {
         });
       } catch (error) {
         console.error("Failed to load roadmap data:", error);
-        // Handle error (maybe show an error message)
       } finally {
         setLoading(false);
       }

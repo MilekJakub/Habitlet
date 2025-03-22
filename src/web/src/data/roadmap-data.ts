@@ -1,5 +1,5 @@
 import { NODE_SIZE } from "@/constants/roadmap-constants";
-import { NodeConfig, RoadmapNodeType } from "@/types/roadmap";
+import { NodeConfig, RoadmapNodeType } from "@/features/roadmap/types/roadmap";
 import { Position } from "@xyflow/react";
 
 export const nodesConfig: Record<RoadmapNodeType, NodeConfig> = {

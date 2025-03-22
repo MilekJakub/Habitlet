@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { Maximize, Minus, Plus } from "lucide-react";
 import {

@@ -6,7 +6,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { NodeConfig, RoadmapNode } from "@/types/roadmap";
+import { NodeConfig, RoadmapNode } from "@/features/roadmap/types/roadmap";
 import { iconMapping } from "@/data/icon-mapping";
 import { nodesConfig } from "@/data/roadmap-data";
 

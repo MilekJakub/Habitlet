@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router";
-import { useAuth } from "@/store/auth.store";
+import { useAuth } from "@/features/auth/stores/auth.store";
 import { Loader2 } from "lucide-react";
 
 interface ProtectedRouteProps {
@@ -11,8 +11,7 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
-  redirectTo = "/login",
-  requireAuth = true,
+  requireAuth = false,
 }) => {
   const { isAuthenticated, isLoading, isRegistering } = useAuth();
 
@@ -24,17 +23,16 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     );
   }
 
-  // If user is registering, allow access to registration flow
   if (isRegistering) {
     return <>{children}</>;
   }
 
   if (requireAuth && !isAuthenticated) {
-    return <Navigate to={redirectTo} replace />;
+    return <Navigate to="/login" replace />;
   }
 
   if (!requireAuth && isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/goals" replace />;
   }
 
   return <>{children}</>;

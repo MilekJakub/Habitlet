@@ -1,5 +1,5 @@
-import { createRoadmapStore } from "@/store/createRoadmapStore";
-import { RoadmapEdge, RoadmapNode, RoadmapNodeData } from "@/types/roadmap";
+import { createRoadmapStore } from "@/features/roadmap/stores/createRoadmapStore";
+import { RoadmapEdge, RoadmapNode, RoadmapNodeData } from "@/features/roadmap/types/roadmap";
 import {
   ColorMode,
   OnConnect,
@@ -8,7 +8,7 @@ import {
   OnNodesChange,
   XYPosition,
 } from "@xyflow/react";
-import React, { createContext, ReactNode, useRef } from "react";
+import { createContext, ReactNode } from "react";
 
 export type RoadmapState = {
   nodes: RoadmapNode[];
@@ -95,20 +95,3 @@ export interface RoadmapStoreProviderProps {
 export const RoadmapStoreContext = createContext<RoadmapStoreApi | undefined>(
   undefined
 );
-
-export const RoadmapStoreProvider = ({
-  children,
-  initialData,
-}: RoadmapStoreProviderProps) => {
-  const store = useRef<RoadmapStoreApi>();
-
-  if (!store.current) {
-    store.current = createRoadmapStore(initialData);
-  }
-
-  return (
-    <RoadmapStoreContext.Provider value={store.current}>
-      {children}
-    </RoadmapStoreContext.Provider>
-  );
-};

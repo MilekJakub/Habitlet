@@ -1,15 +1,24 @@
 import { createEdge } from "@/features/roadmap/components/edges/roadmap-edge";
-import { defaultState } from "@/store/defaultState";
-import { layoutGraph } from "@/store/layout";
+import { layoutGraph } from "@/features/roadmap/stores/layout";
 import {
   PotentialConnection,
-  RoadmapData,
+  RoadmapData, RoadmapState,
   RoadmapStore,
-} from "@/store/roadmap.store";
-import { RoadmapEdge, RoadmapNode } from "@/types/roadmap";
+} from "@/features/roadmap/stores/roadmap.store";
+import { RoadmapEdge, RoadmapNode } from "@/features/roadmap/types/roadmap";
 import { addEdge, applyEdgeChanges, applyNodeChanges } from "@xyflow/react";
 import { create } from "zustand/index";
 import { subscribeWithSelector } from "zustand/middleware";
+
+export const defaultState: RoadmapState = {
+  nodes: [],
+  edges: [],
+  colorMode: "light",
+  layout: "free",
+  draggedNodes: new Map(),
+  connectionSites: new Map(),
+  potentialConnection: undefined,
+};
 
 export const createRoadmapStore = (initialData?: RoadmapData) => {
   return create<RoadmapStore>()(

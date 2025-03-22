@@ -1,4 +1,7 @@
-import { RoadmapStore, RoadmapStoreContext } from "@/store/roadmap.store";
+import {
+  RoadmapStore,
+  RoadmapStoreContext,
+} from "@/features/roadmap/stores/roadmap.store";
 import { useContext } from "react";
 import { useStore } from "zustand/index";
 

@@ -4,7 +4,7 @@ import { Panel } from "@xyflow/react";
 import { Route } from "lucide-react";
 import { ZoomSlider } from "@/features/roadmap/components/zoom-slider";
 import { Button } from "@/components/ui/button";
-import { useLayout } from "@/hooks/use-layout";
+import { useLayout } from "@/features/roadmap/hooks/use-layout";
 
 export const RoadmapControls = () => {
   const runLayout = useLayout(true);

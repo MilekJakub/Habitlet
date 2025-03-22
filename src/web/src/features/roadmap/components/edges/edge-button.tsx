@@ -1,12 +1,12 @@
-import { useRoadmapStore } from "@/store/useRoadmapStore";
+import { useRoadmapStore } from "@/features/roadmap/stores/useRoadmapStore";
 import React, { CSSProperties, useCallback, useEffect } from "react";
 import { EdgeLabelRenderer, EdgeProps } from "@xyflow/react";
 
 import { Button } from "@/components/ui/button";
 import { useDropdown } from "@/hooks/use-dropdown";
 import { RoadmapDropdownMenu } from "@/features/roadmap/components/roadmap-dropdown-menu";
-import { NodeConfig, RoadmapEdge, RoadmapNode } from "@/types/roadmap";
-import { RoadmapStore } from "@/store/roadmap.store";
+import { NodeConfig, RoadmapEdge, RoadmapNode } from "@/features/roadmap/types/roadmap";
+import { RoadmapStore } from "@/features/roadmap/stores/roadmap.store";
 import { useShallow } from "zustand/react/shallow";
 
 const selector = (id: string) => {

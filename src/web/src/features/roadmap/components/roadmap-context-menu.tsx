@@ -1,5 +1,3 @@
-"use client";
-
 import React, { ReactNode } from "react";
 
 import {
@@ -8,12 +6,12 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
-import { RoadmapNodeType } from "@/types/roadmap";
+import { RoadmapNodeType } from "@/features/roadmap/types/roadmap";
 import { iconMapping } from "@/data/icon-mapping";
-import { useClientPosition } from "@/hooks/use-client-position";
+import { useClientPosition } from "@/features/roadmap/hooks/use-client-position";
 import { nodesConfig } from "@/data/roadmap-data";
 
-export default function RoadmapContextMenu({
+export function RoadmapContextMenu({
   children,
 }: {
   children: ReactNode;
